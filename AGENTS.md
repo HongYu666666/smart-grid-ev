@@ -1,6 +1,6 @@
 # EV Charging Repository Instructions
 
-本仓库由 1 名软件负责人和 2 名固定组员共同维护，日常开发默认由 Codex 辅助完成。
+本仓库由 1 名软件负责人和 2 名固定组员共同维护，日常开发默认由 Codex 辅助完成。两名组员各自 fork 主仓库，在个人 fork 的任务分支上工作，再向主仓库 `main` 提交 PR。
 
 ## 权威来源
 
@@ -8,7 +8,7 @@
 
 1. `docs/仿真系统开发进度安排.md`：里程碑、时间和正式成果名称。
 2. 当前 `openspec/changes/<change-id>/`：本次变更的范围、需求、设计和验收任务。
-3. 对应 GitHub Issue：负责人、截止时间、依赖和协作状态。
+3. 对应 GitHub Issue：负责人、成果窗口、依赖和协作状态。
 4. 现有实现与研究文档：作为复用资产和实现证据，不得反向修改已批准范围。
 
 没有已批准 OpenSpec change 和对应 Issue 时，不开始新的功能实现。发现需求不清或范围冲突时，先在 Issue 中记录并交由软件负责人裁定。
@@ -26,12 +26,12 @@
 接到任务后，Codex 必须依次执行：
 
 1. 阅读本文件、对应 Issue、当前 OpenSpec change 和相关源文件。
-2. 执行 `git status --short --branch`，确认位于自己的任务分支且工作区没有来源不明的修改。
+2. 执行 `git status --short --branch`，确认位于个人 fork 的任务分支且工作区没有来源不明的修改。
 3. 执行 `openspec status --change <change-id>`，确认所做内容在 change 范围内。
-4. 在修改函数、类或方法前遵守下方 GitNexus 影响分析要求。
+4. GitNexus 可用且索引新鲜时，在修改函数、类或方法前执行影响分析；不可用时用直接源码检查、搜索和针对性测试替代，并在 PR 中说明。
 5. 只实现 Issue 中的任务；发现额外问题时新建或建议新建 Issue，不顺手扩大本 PR。
 6. 实现后运行针对性检查和仓库基线检查，更新 `tasks.md` 中由自己完成的任务。
-7. 提交原子 commit，推送任务分支，并按模板创建 PR；不得直接推送 `main` 或长期使用 `sim` 开发。
+7. 提交原子 commit，推送到个人 fork 的任务分支，并按模板向主仓库创建 PR；不得直接推送主仓库 `main` 或长期使用 `sim` 开发。
 
 推荐在新 Codex 会话中使用以下开场提示：
 
@@ -44,7 +44,7 @@ openspec/changes/<change-id>/ 下的全部文件。只处理分配给 <member-a|
 
 ## 分支、提交与 PR
 
-- 从最新 `main` 创建短期分支：`feature/<issue>-<slug>`、`fix/<issue>-<slug>`、`docs/<issue>-<slug>` 或 `chore/<issue>-<slug>`。
+- 个人 fork 使用 `origin`，主仓库使用 `upstream`。先同步 `upstream/main`，再创建短期分支：`feature/<issue>-<slug>`、`fix/<issue>-<slug>`、`research/<issue>-<slug>`、`docs/<issue>-<slug>` 或 `chore/<issue>-<slug>`。
 - 一个分支只服务一个 Issue；一个 PR 只交付一个可验收目标。
 - commit 使用 `feat:`、`fix:`、`docs:`、`test:`、`refactor:`、`chore:` 前缀，描述具体结果，避免 `update`、`修改一下` 等模糊信息。
 - 不提交原始大数据、运行产物、缓存、密钥、个人路径配置或 Codex 临时记录。
@@ -56,9 +56,9 @@ openspec/changes/<change-id>/ 下的全部文件。只处理分配给 <member-a|
 在 `ev_charging_v1/` 中至少执行：
 
 ```bash
-rtk python -m compileall -q smart_grid_core
-rtk python -m smart_grid_core.tools.root_step_check --root .
-rtk python -m smart_grid_core.tools.parity_report --root .
+python -m compileall -q smart_grid_core
+python -m smart_grid_core.tools.root_step_check --root .
+python -m smart_grid_core.tools.parity_report --root .
 ```
 
 若改动无法运行其中某项，必须在 PR 中说明原因，并提供等价的针对性检查。最终验收还必须包含 OpenSpec 场景、计划成果文件和可复现证据。
@@ -68,20 +68,20 @@ rtk python -m smart_grid_core.tools.parity_report --root .
 
 This project is indexed by GitNexus as **smart-grid-ev** (1378 symbols, 2364 relationships, 53 execution flows). Use the GitNexus MCP tools to understand code, assess impact, and navigate safely.
 
-> If any GitNexus tool warns the index is stale, run `npx gitnexus analyze` in terminal first.
+> GitNexus is a recommended enhancement, not a startup blocker. If it is configured and the index is stale, run `npx gitnexus analyze` in terminal first.
 
 ## Always Do
 
-- **MUST run impact analysis before editing any symbol.** Before modifying a function, class, or method, run `gitnexus_impact({target: "symbolName", direction: "upstream"})` and report the blast radius (direct callers, affected processes, risk level) to the user.
-- **MUST run `gitnexus_detect_changes()` before committing** to verify your changes only affect expected symbols and execution flows.
-- **MUST warn the user** if impact analysis returns HIGH or CRITICAL risk before proceeding with edits.
+- When GitNexus MCP is available and fresh, run impact analysis before editing a shared symbol and report the blast radius.
+- When GitNexus MCP is available, run `gitnexus_detect_changes()` before committing.
+- Warn the user if available impact analysis returns HIGH or CRITICAL risk before proceeding with edits.
 - When exploring unfamiliar code, use `gitnexus_query({query: "concept"})` to find execution flows instead of grepping. It returns process-grouped results ranked by relevance.
 - When you need full context on a specific symbol — callers, callees, which execution flows it participates in — use `gitnexus_context({name: "symbolName"})`.
 
 ## Never Do
 
-- NEVER edit a function, class, or method without first running `gitnexus_impact` on it.
-- NEVER ignore HIGH or CRITICAL risk warnings from impact analysis.
+- When GitNexus is available, do not edit a shared function, class, or method without first running `gitnexus_impact` on it.
+- Never ignore HIGH or CRITICAL risk warnings returned by impact analysis.
 - NEVER rename symbols with find-and-replace — use `gitnexus_rename` which understands the call graph.
 - NEVER commit changes without running `gitnexus_detect_changes()` to check affected scope.
 

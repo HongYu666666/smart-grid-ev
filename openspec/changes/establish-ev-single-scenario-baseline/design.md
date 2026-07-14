@@ -34,12 +34,12 @@
 
 替代方案是直接多人编辑 DOCX/XLSX，但无法稳定 Review 行级差异，因此不作为源文件。
 
-### 3. 固定主责、交叉 Review、lead 统一裁定
+### 3. 成果主责、交叉 Review、lead 统一裁定
 
-- lead：需求报告、Spec、一致性与最终验收；
-- member-a：EV 场景调研；
-- member-b：场景-业务-孪智功能映射；
-- member-a 与 member-b 交叉 Review，lead 的内容至少由 member-a Review。
+- lead：需求报告、场景-业务-孪智功能映射、Spec、一致性与最终验收；
+- member-a：EV 场景调研和 V2Sim 运行证据；
+- member-b：接口/证据 Review，并在独立 change 中负责候选配电网仿真工具预研；
+- member-a 与 member-b 对 lead/对方成果进行交叉 Review。
 
 这样既符合三人规模，也防止 lead 成为所有内容的唯一作者。替代方案是三人共同编辑全部文件，责任与完成状态无法判定，因此不采用。
 
@@ -80,8 +80,8 @@
 ## Migration Plan
 
 1. 将正式 DOCX 纳入 `docs/`，同步替换旧 Markdown 计划。
-2. 合并本 change 后创建三个 GitHub Issue，对应三项成果和固定角色。
-3. 三人在独立短期分支完成成果并通过交叉 Review。
+2. 合并本 change 后按主要成果创建 GitHub Issue，允许相邻周任务在一个两周窗口内并行推进。
+3. 三人在个人 fork 的独立短期分支完成成果并通过交叉 Review。
 4. lead 执行一致性检查和最终验收，合并成果 PR。
 5. 将已验收 change 归档为主 spec，随后创建工具选型和统一数据模型 change。
 

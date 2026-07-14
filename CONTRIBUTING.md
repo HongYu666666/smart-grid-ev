@@ -4,22 +4,25 @@
 
 ## 1. 开工前
 
-每个任务必须同时具备：
+每个实现任务开始前应具备：
 
-- 一个 GitHub Milestone；
+- 一个 GitHub Milestone 或明确的成果窗口；
 - 一个已完成 proposal/specs/design/tasks 的 OpenSpec change；
-- 一个明确负责人、Reviewer、截止时间和验收方式的 GitHub Issue。
+- 一个明确负责人、Reviewer、目标窗口和验收方式的 GitHub Issue。
 
-缺少任一项时，先补齐治理信息，不进入功能编码。
+研究型任务允许先在 Issue 中进行资料盘点和可行性验证，但在形成正式技术决定或进入功能编码前，必须补齐 OpenSpec 范围与验收标准。
+
+两名组员各自 fork `TsLouis/smart-grid-ev`。在个人仓库中，`origin` 指向自己的 fork，`upstream` 指向主仓库。详细初始化见 `docs/Codex初始化与Fork开发流程.md`。
 
 ## 2. 领取任务
 
 ```bash
-rtk git fetch origin
-rtk git switch main
-rtk git pull --ff-only
-rtk git switch -c feature/<issue>-<slug>
-rtk openspec status --change <change-id>
+git fetch upstream
+git switch main
+git merge --ff-only upstream/main
+git push origin main
+git switch -c feature/<issue>-<slug>
+openspec status --change <change-id>
 ```
 
 若当前工作区不干净，不要覆盖或暂存来源不明的修改；先联系原修改者处理。
@@ -47,13 +50,15 @@ Codex 可以协助实现和自检，但不能代替负责人批准范围，也�
 提交示例：
 
 ```bash
-rtk git add <明确文件列表>
-rtk git diff --cached --check
-rtk git commit -m "feat: add EV scenario state contract"
-rtk git push -u origin feature/<issue>-<slug>
+git add <明确文件列表>
+git diff --cached --check
+git commit -m "feat: add EV scenario state contract"
+git push -u origin feature/<issue>-<slug>
 ```
 
 不要使用 `git add .` 吸收来源不明的改动。需要修改公共接口或共享模型时，先在 Issue 中说明影响并等待 Reviewer 确认。
+
+PR 的目标仓库是 `TsLouis/smart-grid-ev`，目标分支是 `main`，来源分支是个人 fork 中的任务分支。组员不需要主仓库写权限。
 
 ## 5. PR 内容
 
