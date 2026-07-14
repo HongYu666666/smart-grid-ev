@@ -6,11 +6,10 @@
 
 每个实现任务开始前应具备：
 
-- 一个 GitHub Milestone 或明确的成果窗口；
 - 一个已完成 proposal/specs/design/tasks 的 OpenSpec change；
-- 一个明确负责人、Reviewer、目标窗口和验收方式的 GitHub Issue。
+- 一个指向该 change/task、写明直接负责人和 Reviewer 的 GitHub Issue。
 
-研究型任务允许先在 Issue 中进行资料盘点和可行性验证，但在形成正式技术决定或进入功能编码前，必须补齐 OpenSpec 范围与验收标准。
+研究型探索允许先在 Issue 中记录线索，但形成正式结论或进入功能编码前必须纳入 OpenSpec。Issue 不得新增、修改或替代 spec 要求。
 
 两名组员各自 fork `TsLouis/smart-grid-ev`。在个人仓库中，`origin` 指向自己的 fork，`upstream` 指向主仓库。详细初始化见 `docs/Codex初始化与Fork开发流程.md`。
 

@@ -4,13 +4,14 @@
 
 ## 当前协作入口
 
-本仓库采用“正式进度安排 + OpenSpec + GitHub Issue/PR”的交付方式：
+本仓库以 OpenSpec 作为小组推进和验收的单一执行入口：
 
-1. 先阅读 `AGENTS.md` 和 `docs/项目推进与分工.md`。
+1. 先阅读 `AGENTS.md`。
 2. 新成员按 `docs/Codex初始化与Fork开发流程.md` 完成 Codex、OpenSpec、fork 和远端初始化。
-3. 从 `docs/仿真系统开发进度安排.md` 确认里程碑与正式成果名称。
-4. 从 `openspec/changes/<change-id>/` 确认本次变更范围、设计和验收任务。
-5. 按 GitHub Issue 在个人 fork 建立短期分支，实现、验证后向主仓库提交 PR。
+3. 从 `openspec/changes/<change-id>/` 确认本次变更范围、设计、任务和验收标准。
+4. 按指向该 change/task 的 GitHub Issue，在个人 fork 建立短期分支，实现、验证后向主仓库提交 PR。
+
+正式进度安排由 lead 用于创建和验收 OpenSpec change；组员不需要绕过 spec 再从计划文档自行拆解工作。
 
 禁止直接在 `main` 或长期共享的 `sim` 分支上开展日常功能开发。具体提交、Review 和验收规则见 `CONTRIBUTING.md`。
 
@@ -23,7 +24,6 @@ EV_charging/
 │   ├── 世界模型调研报告.md        # 工具路线调研与推荐架构
 │   ├── 世界模型原型设计书.md      # 原型模块职责、API、验收标准
 │   ├── 软件组双周推进模板.md      # 双周例会成员汇报模板
-│   ├── 项目推进与分工.md           # lead/组员职责、里程碑和当前任务
 │   ├── 仿真系统开发进度安排.md      # 正式计划的 GitHub 可读版本
 │   └── 汇报材料_调研进度_*.md    # 阶段性汇报材料
 ├── ev_charging_v1/              # v1 研究代码与数据资产
@@ -44,7 +44,7 @@ EV_charging/
 |---|---|
 | 了解课题约束和里程碑 | `docs/软件组接手总览.md` |
 | 查看正式进度与成果名称 | `docs/仿真系统开发进度安排.md` |
-| 查看 lead/组员分工与当前推进状态 | `docs/项目推进与分工.md` |
+| 查看当前推进范围和任务 | `openspec/changes/<change-id>/` |
 | 初始化 Codex 并建立个人 fork | `docs/Codex初始化与Fork开发流程.md` |
 | 了解分支、提交和 PR 规则 | `CONTRIBUTING.md` |
 | 了解世界模型技术路线 | `docs/世界模型调研报告.md` |

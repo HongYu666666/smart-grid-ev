@@ -1,6 +1,6 @@
 ## 1. 基线准备
 
-- [ ] 1.1 `lead`（Reviewer: `member`）确认三项成果路径、两周成果窗口和统一角色标识；验证：`docs/项目推进与分工.md` 只区分 `lead` 与 `member`，不含人员姓名或账号占位符。
+- [ ] 1.1 `lead`（Reviewer: `member`）在本 change 中确认三项成果路径、两周成果窗口和 `lead`/`member` 职责边界；验证：proposal、design、specs、tasks 表述一致，且没有外部分工台账依赖。
 - [ ] 1.2 `lead`（Reviewer: `member`）从任务书/实施方案和正式计划提取可定位的来源条目，建立 `REQ-EV-001` 起的需求编号清单；成果：`docs/deliverables/软件需求分析报告.md`；验证：每条规范性需求包含来源和验收方式。
 
 ## 2. 软件需求分析报告

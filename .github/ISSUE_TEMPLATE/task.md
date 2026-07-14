@@ -1,6 +1,6 @@
 ---
 name: 计划任务
-about: 从正式进度安排和 OpenSpec change 拆分可验收任务
+about: 从已批准 OpenSpec change 领取可验收任务
 title: "[type][role] "
 labels: "status:ready"
 assignees: ""
@@ -8,18 +8,15 @@ assignees: ""
 
 ## 计划与 Spec
 
-- GitHub Milestone（可选）：
-- 成果窗口：
 - OpenSpec change：
 - OpenSpec task 编号：
-- 正式进度安排条目：
 - 负责人角色：`lead` / `member`
 - Reviewer：
 - 期望完成时间（可选，不作为每日排期）：
 
 ## 目标
 
-说明本 Issue 要形成的一个可验收结果。
+说明本 Issue 要完成的一个 OpenSpec task；不得在此扩大 spec 范围。
 
 ## 范围
 
