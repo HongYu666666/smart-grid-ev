@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Smart Grid 数字孪生 · 拓扑画布</title>
+<title>智能电网数字孪生 · 拓扑画布</title>
 <style>
   :root{
     --bg:#f5f6fa; --panel:#fff; --ink:#0f172a; --muted:#64748b; --line:#e2e8f0;
@@ -12,20 +12,20 @@
   }
   *{box-sizing:border-box}
   body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--ink)}
-  .hero{padding:16px 22px 10px;background:linear-gradient(180deg,#fff,#f8fafc);border-bottom:1px solid var(--line)}
-  .hero h1{margin:0;font-size:21px}
-  .thesis{color:var(--muted);margin-top:3px;font-size:13px}
+  .hero{padding:18px 24px 12px;background:linear-gradient(180deg,#fff,#f8fafc);border-bottom:1px solid var(--line)}
+  .hero h1{margin:0;font-size:25px}
+  .thesis{color:var(--muted);margin-top:5px;font-size:16px}
   .badges{margin-top:9px;display:flex;gap:7px;flex-wrap:wrap}
-  .badge{display:inline-flex;gap:5px;align-items:baseline;padding:4px 10px;border:1px solid var(--line);border-radius:999px;background:#fff;font-size:12px}
-  .badge b{font-size:14px;font-weight:700}
+  .badge{display:inline-flex;gap:5px;align-items:baseline;padding:5px 11px;border:1px solid var(--line);border-radius:999px;background:#fff;font-size:13px}
+  .badge b{font-size:16px;font-weight:700}
   .badge.ok{border-color:#86efac;background:#f0fdf4;color:#15803d}
   .badge.warn{border-color:#fcd34d;background:#fffbeb;color:#92400e}
   .badge.err{border-color:#fca5a5;background:#fef2f2;color:#991b1b}
   .chapters{display:flex;gap:6px;padding:8px 22px;background:#fff;border-bottom:1px solid var(--line);flex-wrap:wrap}
-  .chapter{padding:7px 14px;border-radius:7px;font-size:13px;cursor:pointer;color:var(--muted);border:1px solid transparent}
+  .chapter{padding:8px 15px;border-radius:7px;font-size:16px;cursor:pointer;color:var(--muted);border:1px solid transparent}
   .chapter:hover{background:#f1f5f9;color:var(--ink)}
   .chapter.active{background:#eef2ff;color:#3730a3;border-color:#c7d2fe;font-weight:600}
-  .shell{display:grid;grid-template-columns:1fr 400px;min-height:calc(100vh - 132px)}
+  .shell{display:grid;grid-template-columns:1fr 370px;min-height:calc(100vh - 148px)}
   .canvas-wrap{position:relative;overflow:hidden;background:#fbfcff}
   svg{width:100%;height:100%;min-height:880px;display:block}
   aside{border-left:1px solid var(--line);background:#fff;display:flex;flex-direction:column;min-width:0;overflow-y:auto}
@@ -36,37 +36,37 @@
   .chip.on{background:#eef2ff;border-color:#6366f1;color:#3730a3}
   .chip.station.on{background:#fef2f2;border-color:var(--station);color:var(--station)}
   .chip.coupling.on{background:#faf5ff;border-color:var(--coupling);color:var(--coupling)}
-  .legend{position:absolute;right:14px;top:14px;z-index:3;background:rgba(255,255,255,.96);border:1px solid var(--line);border-radius:10px;padding:8px 11px;font-size:11px;box-shadow:0 2px 6px rgba(15,23,42,.06);max-width:230px}
-  .legend h3{margin:0 0 5px;font-size:11px;color:var(--muted);letter-spacing:1px}
+  .legend{position:absolute;right:14px;top:14px;z-index:3;background:rgba(255,255,255,.96);border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-size:13px;box-shadow:0 2px 6px rgba(15,23,42,.06);max-width:270px}
+  .legend h3{margin:0 0 6px;font-size:13px;color:var(--muted);letter-spacing:1px}
   .legend .row{display:flex;align-items:center;gap:6px;margin:2px 0;color:#334155}
   .legend .sw{width:11px;height:11px;border-radius:50%;flex:none}
   .legend .swl{width:18px;height:0;border-top:3px solid;flex:none}
-  .playbar{background:linear-gradient(180deg,#ffffff,#f1f5f9);border-bottom:1px solid var(--line);padding:8px 22px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+  .playbar{background:linear-gradient(180deg,#ffffff,#f1f5f9);border-bottom:1px solid var(--line);padding:10px 24px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
   .playbar input[type=range]{flex:1;min-width:200px}
-  .playbar button{font:inherit;padding:5px 13px;border-radius:6px;border:1px solid #cbd5e1;background:#fff;cursor:pointer}
+  .playbar button{font:inherit;padding:6px 14px;border-radius:6px;border:1px solid #cbd5e1;background:#fff;cursor:pointer}
   .playbar button.primary{background:#4f46e5;border-color:#4f46e5;color:#fff}
-  .playbar .label{font-size:12px;color:var(--muted);min-width:84px;font-variant-numeric:tabular-nums}
-  .section{padding:13px 15px;border-bottom:1px solid var(--line)}
-  h2{margin:0 0 9px;font-size:14px}
-  .meta{color:var(--muted);font-size:12px;line-height:1.55}
+  .playbar .label{font-size:14px;color:var(--muted);min-width:84px;font-variant-numeric:tabular-nums}
+  .section{padding:15px 16px;border-bottom:1px solid var(--line)}
+  h2{margin:0 0 10px;font-size:17px}
+  .meta{color:var(--muted);font-size:14px;line-height:1.6}
   .pill{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:2px 9px;font-size:11px;margin:2px 4px 2px 0}
   .pill.ok{border-color:#86efac;background:#f0fdf4;color:var(--ok)}
   .pill.err{border-color:#fca5a5;background:#fef2f2;color:var(--err)}
   .pill.warn{border-color:#fcd34d;background:#fffbeb;color:var(--warn)}
-  .metric-row{display:flex;justify-content:space-between;padding:4px 0;font-size:12px;border-bottom:1px dashed #f1f5f9}
+  .metric-row{display:flex;justify-content:space-between;padding:5px 0;font-size:13px;border-bottom:1px dashed #f1f5f9}
   .metric-row b{font-variant-numeric:tabular-nums}
-  .order-item{padding:7px 9px;border:1px solid var(--line);border-radius:6px;margin-bottom:5px;cursor:pointer;font-size:12px;display:flex;justify-content:space-between;gap:8px;align-items:center;transition:background .15s,border-color .15s}
+  .order-item{padding:8px 10px;border:1px solid var(--line);border-radius:6px;margin-bottom:6px;cursor:pointer;font-size:14px;display:flex;justify-content:space-between;gap:8px;align-items:center;transition:background .15s,border-color .15s}
   .order-item:hover{background:#f8fafc}
   .order-item.selected{border-color:#7c3aed;background:#faf5ff}
   .order-item.firing{border-color:#f97316;background:#fff7ed;box-shadow:0 0 0 2px rgba(249,115,22,.18)}
-  .order-item .badge-sm{font-size:10px;padding:1px 7px;border-radius:999px;background:#f1f5f9;color:#475569}
+  .order-item .badge-sm{font-size:12px;padding:2px 8px;border-radius:999px;background:#f1f5f9;color:#475569;white-space:nowrap}
   .order-item .badge-sm.perception{background:#dbeafe;color:#1e40af}
   .order-item .badge-sm.decision{background:#fed7aa;color:#9a3412}
   .order-item .badge-sm.policy{background:#bbf7d0;color:#166534}
   .order-item .badge-sm.advisor{background:#e9d5ff;color:#6b21a8}
   .order-item .verdict.ok{color:var(--ok)} .order-item .verdict.err{color:var(--err)}
-  .order-item .conf{font-variant-numeric:tabular-nums;font-size:10px;color:var(--muted)}
-  pre{margin:0;white-space:pre-wrap;word-break:break-word;font-size:11.5px;line-height:1.45;color:#1e293b;background:#f8fafc;border:1px solid #f1f5f9;border-radius:6px;padding:8px}
+  .order-item .conf{font-variant-numeric:tabular-nums;font-size:12px;color:var(--muted)}
+  pre{margin:0;white-space:pre-wrap;word-break:break-word;font-size:12.5px;line-height:1.5;color:#1e293b;background:#f8fafc;border:1px solid #f1f5f9;border-radius:6px;padding:8px}
   textarea{width:100%;height:74px;resize:vertical;border:1px solid var(--line);border-radius:6px;padding:8px;font:inherit}
   button{font:inherit;border:1px solid #94a3b8;background:#fff;border-radius:6px;padding:6px 10px;cursor:pointer}
   button.primary{border-color:#7c3aed;background:#7c3aed;color:#fff}
@@ -80,21 +80,21 @@
   .edge.hilite{stroke-opacity:1}
   .coupling-line{fill:none;stroke:var(--coupling);stroke-dasharray:7 4;stroke-width:2.4;cursor:pointer;opacity:.75}
   .coupling-line:hover,.coupling-line.hilite{opacity:1;stroke-width:4}
-  .nlabel{font-size:10px;fill:#334155;pointer-events:none;text-anchor:middle;dominant-baseline:central}
-  .vlabel{font-size:9.5px;fill:#b45309;pointer-events:none;text-anchor:middle;dominant-baseline:hanging;font-variant-numeric:tabular-nums}
+  .nlabel{font-size:22px;fill:#334155;pointer-events:none;text-anchor:middle;dominant-baseline:central}
+  .vlabel{font-size:18px;fill:#b45309;pointer-events:none;text-anchor:middle;dominant-baseline:hanging;font-variant-numeric:tabular-nums}
   .region-frame{fill:#ffffff;stroke:#cbd5e1;stroke-dasharray:5 4}
   .region-frame.focused{stroke:#7c3aed;stroke-width:2;stroke-dasharray:none}
   .sub-frame{fill:none;stroke:#e2e8f0}
-  .ttl{font-size:14px;fill:#334155;font-weight:700}
-  .sub-ttl{font-size:11px;fill:#94a3b8;font-weight:700;letter-spacing:1.5px}
+  .ttl{font-size:30px;fill:#334155;font-weight:700}
+  .sub-ttl{font-size:24px;fill:#94a3b8;font-weight:700;letter-spacing:0}
   .cf-edge.delegates{stroke:#7c3aed;stroke-dasharray:7 5}
   .cf-edge.data_flow{stroke:#f97316}
   .cf-edge.invokes{stroke:#475569;stroke-dasharray:3 4}
-  .read-arrow{stroke:#16a34a;stroke-width:2;fill:none;stroke-dasharray:2 3}
-  .write-arrow{stroke:#ea580c;stroke-width:2.4;fill:none}
+  .read-arrow{stroke:#16a34a;stroke-width:3;fill:none;stroke-dasharray:3 4}
+  .write-arrow{stroke:#ea580c;stroke-width:3.4;fill:none}
   .cf-rect{transition:fill .2s,stroke .2s}
   .cf-rect.firing{fill:#fef3c7 !important;stroke:#d97706 !important;stroke-width:3 !important}
-  .channel-note{font-size:11px;fill:#94a3b8}
+  .channel-note{font-size:22px;fill:#94a3b8}
   @media (max-width:1180px){.shell{grid-template-columns:1fr}aside{border-left:0;border-top:1px solid var(--line)}svg{min-height:760px}}
 </style>
 </head>
@@ -127,7 +127,7 @@
     <div class="section"><h2>网络度量</h2><div id="metrics"></div></div>
     <div class="section"><h2>校验</h2><div id="errors"></div></div>
     <div class="section">
-      <h2>Human-as-LLM · 你是 llm_advisor</h2>
+      <h2>人类扮演 LLM 顾问</h2>
       <div class="meta" id="advisorContext"></div>
       <textarea id="humanInput" placeholder="综合各专家代理的建议,给出最终引导。可写明充电站,例如:建议去 S5,电价更低且队列短。"></textarea>
       <div style="margin-top:6px;display:flex;gap:6px">
@@ -142,8 +142,8 @@
 <script>
 const data = {
   "metadata": {
-    "title": "Smart Grid 数字孪生 · 拓扑画布",
-    "thesis": "一个 Agent · 在「市 → 区」的数字孪生上做决策 · 物理拓扑与决策流共享同一套孪生语言",
+    "title": "智能电网数字孪生 · 拓扑画布",
+    "thesis": "一个智能体在「市 → 区」数字孪生上决策,物理拓扑与决策流共享同一套孪生语言",
     "root": "/home/ts/Smart_Grid_Project/EV_charging",
     "city_id": "city",
     "day": 1,
@@ -14600,14 +14600,59 @@ const KIND_COLOR = {
   city:"#1e293b", region:"#2563eb"
 };
 const LAYER_COLOR = { grid:"#2563eb", traffic:"#0d9488", coupling:"#9333ea", control:"#7c3aed" };
+const GROUP_LABEL = {
+  perception:"感知代理",
+  decision:"决策代理",
+  policy:"策略代理",
+  advisor:"顾问代理"
+};
+const REGION_LABEL = {
+  district_a:"区域 A",
+  district_b:"区域 B"
+};
+const AGENT_LABEL = {
+  ev_charging_root_agent:"根智能体：调度专家",
+  trip_forecast_agent:"行程预测：估计路程",
+  station_decision_agent:"站点选择：选充电站",
+  grid_friendly_agent:"负荷策略：削峰填谷",
+  price_policy_agent:"电价策略：动态调价",
+  queue_forecast_agent:"排队预测：估计等待",
+  charging_mode_agent:"充电模式：选快慢充",
+  charge_need_agent:"充电需求：判断充电",
+  target_soc_agent:"目标电量：设定 SOC",
+  llm_advisor_agent:"LLM 顾问：汇总建议",
+  precomputed_forecast_tool:"预测工具：查结果",
+  static_policy_tool:"策略工具：查方案"
+};
+const CAPABILITY_LABEL = {
+  vehicle_state:"车辆状态",
+  route_state:"路网状态",
+  reachable_stations:"可达站点",
+  station_price:"站点电价",
+  station_resource_state:"站点资源",
+  renewable_state:"可再生出力",
+  base_load_state:"基础负荷",
+  charge_event:"充电事件",
+  runtime_context:"运行上下文",
+  specialist_proposals:"专家提案",
+  trip_forecast:"行程预测",
+  station_decision:"站点选择",
+  grid_friendly_strategy:"电网友好策略",
+  price_policy:"电价策略",
+  queue_forecast:"排队预测",
+  charging_mode:"充电模式",
+  charge_need:"充电需求",
+  target_soc:"目标 SOC",
+  llm_advice:"顾问建议"
+};
 
 const CHAPTERS = [
   { id:"city",   label:"① 城市拓扑",
-    desc:"市 → 区。一座城市由若干个区组成;每个区本身就是一套完整的「电网 + 交通」数字孪生。当前是 1 个市、2 个区:District B 与 District A 拓扑同构(B 是 A 加了一点高斯扰动的副本),所以两区之间画了一条「拓扑同构」边。单击某个区聚焦,双击进入它的内部拓扑。" },
+    desc:"市 → 区。一座城市由若干个区组成;每个区本身就是一套完整的「电网 + 交通」数字孪生。当前是 1 个市、2 个区:区域 B 与区域 A 拓扑同构(区域 B 是区域 A 加了一点高斯扰动的副本),所以两区之间画了一条「拓扑同构」边。单击某个区聚焦,双击进入它的内部拓扑。" },
   { id:"region", label:"② 区域孪生(电网×交通)",
     desc:"把电网层和交通层画在同一张图上。7 个充电站是两层唯一的物理交汇点,用粗紫线显式连接(interlayer 边)。节点越大 / 内核越亮,表示它当前承载的量越大(负荷 / 车流 / 电价);拖动下方时间轴看一天 24 小时内的演化。" },
   { id:"agent",  label:"③ 智能体如何调控孪生",
-    desc:"一个 Root Agent 调度感知 / 决策 / 策略 / 顾问代理,按 capability 依赖拓扑排序执行。每个代理从孪生体「读取」一些量(SOC、电价、车流…),做预测与决策,再把结果「写回」孪生体、改变它的 state。点击代理看它读/写哪些量;点「▶ 走一遍决策」逐步播放整条链路。" }
+    desc:"一个根智能体调度感知、决策、策略、顾问四类专家代理。专家代理从数字孪生中读取车辆、路网、电价、排队、负荷等状态,生成预测或调控建议,再把站点选择、目标电量、充电模式、电价策略等结果写回孪生。点击节点可查看读写关系,点击「走一遍决策」可逐步播放整条调控链路。" }
 ];
 
 const links = data.agent_twin_links || {};
@@ -14637,7 +14682,11 @@ function geo(layer, regionId){ return (data.geo_graphs||[]).find(g=>g.layer===la
 function couplingEdges(regionId){ const g=geo("coupling",regionId); return g?g.edges:[]; }
 function cfNode(id){ return cfGraph ? cfGraph.nodes.find(n=>n.id===id) : null; }
 function groupOf(id){ const n=cfNode(id); return (n&&n.metadata&&n.metadata.group)||"advisor"; }
-function regionLabel(id){ const r=regions.find(x=>x.region_id===id); return r?r.label:id; }
+function regionLabel(id){ return REGION_LABEL[id] || ((regions.find(x=>x.region_id===id)||{}).label) || id; }
+function displayAgent(id){ return AGENT_LABEL[id] || id; }
+function displayGroup(g){ return GROUP_LABEL[g] || g; }
+function displayCapability(v){ return CAPABILITY_LABEL[v] || v; }
+function displayLayer(v){ return v==="grid" ? "电网" : (v==="traffic" ? "交通" : (v==="coupling" ? "耦合" : v)); }
 
 // ---- effective node state (static snapshot OR timeline frame) ----
 function frameEntry(regionId){
@@ -14710,8 +14759,8 @@ function drawGeoNode(node, regionId, pos, opts){
   add(c);
   if(intensity>0.04){ const core=el("circle",{cx:pos.x,cy:pos.y,r:(1.5+5.5*intensity*baseR).toFixed(1),class:"core",fill:heatColor(intensity),"fill-opacity":0.95}); add(core); }
   if(hi){ const ring=el("circle",{cx:pos.x,cy:pos.y,r:(r+4).toFixed(1),fill:"none",stroke:"#16a34a","stroke-width":2.5,"stroke-dasharray":"2 2"}); add(ring); }
-  if(isStation||node.kind==="substation"){ const t=el("text",{x:pos.x,y:pos.y-r-5,class:"nlabel"}); t.textContent=node.label; add(t); }
-  if(state.showValues && ps && baseR>=0.85){ const t=el("text",{x:pos.x,y:pos.y+r+3,class:"vlabel"}); t.textContent=ps.fmt; add(t); }
+  if(isStation||node.kind==="substation"){ const t=el("text",{x:pos.x,y:pos.y-r-10,class:"nlabel"}); t.textContent=node.label; add(t); }
+  if(state.showValues && ps && baseR>=0.85){ const t=el("text",{x:pos.x,y:pos.y+r+8,class:"vlabel"}); t.textContent=ps.fmt; add(t); }
   return r;
 }
 
@@ -14747,16 +14796,16 @@ function renderCity(){
       add(p);
       const tx=(a.x+b.x)/2+110, ty=(a.y+b.y)/2;
       const t1=el("text",{x:tx,y:ty-6,class:"channel-note","text-anchor":"middle",style:"fill:#0d9488"}); t1.textContent="拓扑同构"; add(t1);
-      const t2=el("text",{x:tx,y:ty+9,class:"channel-note","text-anchor":"middle","font-size":10,style:"fill:#94a3b8"}); t2.textContent="District B = District A + 扰动"; add(t2);
+      const t2=el("text",{x:tx,y:ty+24,class:"channel-note","text-anchor":"middle","font-size":22,style:"fill:#94a3b8"}); t2.textContent="区域 B = 区域 A + 扰动"; add(t2);
     }
   });
   // city node — light fill, dark text
   const cw=320, ch=110;
   const cr=el("rect",{x:cityPos.x-cw/2, y:cityPos.y-ch/2, width:cw, height:ch, rx:16, fill:"#e0e7ff", stroke:"#4338ca", "stroke-width":3.5, class:"node","data-id":city.id});
   cr.addEventListener("click",()=>inspect({kind:"city",data:{id:city.id, regions:regs.length}},cr)); add(cr);
-  let t=el("text",{x:cityPos.x,y:cityPos.y-22,class:"nlabel","font-size":19,"font-weight":700}); t.textContent="🏙  城市 · "+city.id; add(t);
-  t=el("text",{x:cityPos.x,y:cityPos.y+2,class:"nlabel","font-size":12.5,style:"fill:#475569"}); t.textContent=regs.length+" 个区"; add(t);
-  t=el("text",{x:cityPos.x,y:cityPos.y+22,class:"nlabel","font-size":12.5,style:"fill:#475569"}); t.textContent="每个区 = 一套完整孪生(电网+交通)"; add(t);
+  let t=el("text",{x:cityPos.x,y:cityPos.y-28,class:"nlabel","font-size":32,"font-weight":700}); t.textContent="城市 · "+city.id; add(t);
+  t=el("text",{x:cityPos.x,y:cityPos.y+8,class:"nlabel","font-size":23,style:"fill:#475569"}); t.textContent=regs.length+" 个区"; add(t);
+  t=el("text",{x:cityPos.x,y:cityPos.y+40,class:"nlabel","font-size":23,style:"fill:#475569"}); t.textContent="每个区 = 电网 + 交通孪生"; add(t);
   // region nodes
   regs.forEach(r=>{
     const p=regPos.get(r.id); const w=340,h=190;
@@ -14765,10 +14814,10 @@ function renderCity(){
     rect.addEventListener("click",()=>{ state.focusRegion=r.id; renderToolbar(); inspect({kind:"region",data:r},rect); render(); });
     rect.addEventListener("dblclick",()=>{ state.focusRegion=r.id; setChapter("region"); });
     add(rect);
-    let tt=el("text",{x:p.x,y:p.y-h/2+30,class:"nlabel","font-size":17,"font-weight":700}); tt.textContent="📍  "+r.label; add(tt);
+    let tt=el("text",{x:p.x,y:p.y-h/2+42,class:"nlabel","font-size":30,"font-weight":700}); tt.textContent=regionLabel(r.id); add(tt);
     const lines=[`${r.stats.nodes} 节点 · ${r.stats.edges} 边`,`${r.stats.stations} 充电站(电网 ∩ 交通)`,`电网层 + 交通层 + 耦合层`];
-    lines.forEach((ln,i)=>{ const x=el("text",{x:p.x,y:p.y-h/2+62+i*24,class:"nlabel","font-size":13,style:"fill:#475569"}); x.textContent=ln; add(x); });
-    const hint=el("text",{x:p.x,y:p.y+h/2-16,class:"channel-note","font-size":11.5}); hint.textContent="单击聚焦 · 双击进入区域孪生 ▸"; add(hint);
+    lines.forEach((ln,i)=>{ const x=el("text",{x:p.x,y:p.y-h/2+82+i*32,class:"nlabel","font-size":22,style:"fill:#475569"}); x.textContent=ln; add(x); });
+    const hint=el("text",{x:p.x,y:p.y+h/2-18,class:"channel-note","font-size":20}); hint.textContent="双击进入区域孪生"; add(hint);
   });
 }
 
@@ -14800,8 +14849,8 @@ function renderRegion(){
   // sub-frames + titles
   add(el("rect",{x:L.gridBox.x-14,y:L.gridBox.y-14,width:L.gridBox.w+28,height:L.gridBox.h+28,rx:12,class:"sub-frame"}));
   add(el("rect",{x:L.trafBox.x-14,y:L.trafBox.y-14,width:L.trafBox.w+28,height:L.trafBox.h+28,rx:12,class:"sub-frame"}));
-  let g=el("text",{x:L.gridBox.x,y:L.gridBox.y-22,class:"sub-ttl",fill:LAYER_COLOR.grid}); g.textContent="电网层  GRID"; add(g);
-  let tr=el("text",{x:L.trafBox.x,y:L.trafBox.y-22,class:"sub-ttl",fill:LAYER_COLOR.traffic}); tr.textContent="交通层  TRAFFIC"; add(tr);
+  let g=el("text",{x:L.gridBox.x,y:L.gridBox.y-28,class:"sub-ttl",fill:LAYER_COLOR.grid,"font-size":28}); g.textContent="电网层"; add(g);
+  let tr=el("text",{x:L.trafBox.x,y:L.trafBox.y-28,class:"sub-ttl",fill:LAYER_COLOR.traffic,"font-size":28}); tr.textContent="交通层"; add(tr);
   // intralayer edges
   ["grid","traffic"].forEach(layer=>{
     const G = geo(layer, regionId); if(!G) return;
@@ -14825,13 +14874,13 @@ function renderRegion(){
       const mx=(a.x+b.x)/2, my=(a.y+b.y)/2-40;
       const p=el("path",{d:`M${a.x},${a.y} Q${mx},${my} ${b.x},${b.y}`,class:"coupling-line"+(state.highlightAgentId?"":" hilite"),"data-id":e.id});
       p.addEventListener("click",()=>inspect({kind:"coupling_edge",region_id:regionId,data:e},p)); add(p);
-      const lbl=el("text",{x:mx,y:my-3,class:"nlabel",fill:LAYER_COLOR.coupling,"font-size":11,"font-weight":700}); lbl.textContent=(e.metadata&&e.metadata.label)||("S"+(e.metadata&&e.metadata.station_index)); add(lbl);
+      const lbl=el("text",{x:mx,y:my-12,class:"nlabel",fill:LAYER_COLOR.coupling,"font-size":24,"font-weight":700}); lbl.textContent=(e.metadata&&e.metadata.label)||("S"+(e.metadata&&e.metadata.station_index)); add(lbl);
     });
   }
   // nodes (draw after edges)
   ["grid","traffic"].forEach(layer=>{
     const G = geo(layer, regionId); if(!G) return;
-    G.nodes.forEach(n=>{ const p=L.pos.get(n.id); if(p) drawGeoNode(n, regionId, p, {scale:1}); });
+    G.nodes.forEach(n=>{ const p=L.pos.get(n.id); if(p) drawGeoNode(n, regionId, p, {scale:1.18}); });
   });
 }
 
@@ -14846,27 +14895,25 @@ function cfLayout(box){
   const groups = ["perception","decision","policy","advisor"].filter(g=>subs.some(n=>groupOf(n.id)===g));
   const colW = box.w/Math.max(groups.length,1);
   const pos=new Map();
-  if(root) pos.set(root.id,{x:box.x+box.w/2, y:box.y+24, node:root});
+  if(root) pos.set(root.id,{x:box.x+box.w/2, y:box.y+72, node:root});
   groups.forEach((grp,gi)=>{
     const mem = subs.filter(n=>groupOf(n.id)===grp);
     const cx = box.x+(gi+0.5)*colW;
-    const rowH = Math.min(70, (box.h-130)/Math.max(mem.length,1));
-    mem.forEach((n,i)=> pos.set(n.id,{x:cx, y:box.y+92+i*rowH, node:n}));
+    const rowH = Math.min(110, (box.h-280)/Math.max(mem.length,1));
+    mem.forEach((n,i)=> pos.set(n.id,{x:cx, y:box.y+215+i*rowH, node:n}));
   });
-  const maxRows = Math.max(...groups.map(g=>subs.filter(n=>groupOf(n.id)===g).length),1);
-  const toolsY = box.y+92+maxRows*Math.min(70,(box.h-130)/Math.max(maxRows,1))+24;
-  tools.forEach((n,i)=> pos.set(n.id,{x:box.x+box.w*(0.32+0.36*i), y:Math.min(toolsY, box.y+box.h-20), node:n}));
+  tools.forEach((n,i)=> pos.set(n.id,{x:box.x+box.w*(0.34+0.32*i), y:box.y+box.h-52, node:n}));
   return {pos, groups, colW, root, tools};
 }
 
 function renderAgent(){
   const regionId = state.focusRegion;
-  const cfBox = {x:60, y:96, w:VW-120, h:560};
-  const twBox = {x:60, y:700, w:VW-120, h:VH-720};
+  const cfBox = {x:70, y:110, w:VW-140, h:620};
+  const twBox = {x:70, y:790, w:VW-140, h:VH-815};
   // ----- divider + titles -----
-  let t=el("text",{x:cfBox.x,y:cfBox.y+2,class:"sub-ttl",fill:"#7c3aed"}); t.textContent="决策流  ROOT AGENT · SUBAGENTS · TOOLS"; add(t);
+  let t=el("text",{x:cfBox.x,y:cfBox.y+6,class:"sub-ttl",fill:"#7c3aed","font-size":30}); t.textContent="决策流: 根智能体 → 专家智能体 → 工具"; add(t);
   add(el("line",{x1:30,y1:twBox.y-22,x2:VW-30,y2:twBox.y-22,stroke:"#cbd5e1","stroke-dasharray":"8 6"}));
-  let t2=el("text",{x:twBox.x,y:twBox.y-4,class:"sub-ttl",fill:"#0d9488"}); t2.textContent="数字孪生(被调控的对象)· "+regionLabel(regionId); add(t2);
+  let t2=el("text",{x:twBox.x,y:twBox.y-2,class:"sub-ttl",fill:"#0d9488","font-size":30}); t2.textContent="数字孪生: 被感知与调控的对象 · "+regionLabel(regionId); add(t2);
   // ----- twin band (compact combined region) -----
   const L = regionLayout(regionId, {x:twBox.x+30, y:twBox.y+14, w:twBox.w-60, h:twBox.h-30});
   ["grid","traffic"].forEach(layer=>{
@@ -14877,18 +14924,18 @@ function renderAgent(){
   if(state.showCoupling) couplingEdges(regionId).forEach(e=>{ const a=L.pos.get(e.source),b=L.pos.get(e.target); if(!a||!b)return;
     add(el("path",{d:`M${a.x},${a.y} L${b.x},${b.y}`,class:"coupling-line"})); });
   ["grid","traffic"].forEach(layer=>{ const G=geo(layer,regionId); if(!G)return;
-    G.nodes.forEach(n=>{ const p=L.pos.get(n.id); if(p) drawGeoNode(n, regionId, p, {scale:0.78}); }); });
-  let gl=el("text",{x:L.gridBox.x,y:twBox.y+8,class:"sub-ttl",fill:LAYER_COLOR.grid,"font-size":10}); gl.textContent="GRID"; add(gl);
-  let tl=el("text",{x:L.trafBox.x,y:twBox.y+8,class:"sub-ttl",fill:LAYER_COLOR.traffic,"font-size":10}); tl.textContent="TRAFFIC"; add(tl);
+    G.nodes.forEach(n=>{ const p=L.pos.get(n.id); if(p) drawGeoNode(n, regionId, p, {scale:1.22}); }); });
+  let gl=el("text",{x:L.gridBox.x,y:twBox.y+14,class:"sub-ttl",fill:LAYER_COLOR.grid,"font-size":24}); gl.textContent="电网层"; add(gl);
+  let tl=el("text",{x:L.trafBox.x,y:twBox.y+14,class:"sub-ttl",fill:LAYER_COLOR.traffic,"font-size":24}); tl.textContent="交通层"; add(tl);
   const twGridAnchor = {x:L.gridBox.x+L.gridBox.w/2, y:twBox.y+14};
   const twTrafAnchor = {x:L.trafBox.x+L.trafBox.w/2, y:twBox.y+14};
   // ----- control-flow graph -----
   const CF = cfLayout(cfBox);
   if(CF.groups){ CF.groups.forEach((grp,gi)=>{ const x=cfBox.x+(gi+0.5)*CF.colW;
-    const tt=el("text",{x,y:cfBox.y+74,class:"sub-ttl","text-anchor":"middle","font-size":10}); tt.textContent=grp.toUpperCase(); add(tt); }); }
+    const tt=el("text",{x,y:cfBox.y+165,class:"sub-ttl","text-anchor":"middle","font-size":27}); tt.textContent=displayGroup(grp); add(tt); }); }
   cfGraph && cfGraph.edges.forEach(e=>{ const a=CF.pos.get(e.source),b=CF.pos.get(e.target); if(!a||!b)return;
     const my=(a.y+b.y)/2;
-    const p=el("path",{d:`M${a.x},${a.y} C${a.x},${my} ${b.x},${my} ${b.x},${b.y}`,class:`edge cf-edge ${e.kind}`,"stroke-width":1.5,
+    const p=el("path",{d:`M${a.x},${a.y} C${a.x},${my} ${b.x},${my} ${b.x},${b.y}`,class:`edge cf-edge ${e.kind}`,"stroke-width":2.4,
       "marker-end":e.kind==="data_flow"?"url(#aO)":(e.kind==="invokes"?"url(#aG)":"url(#aV)"),"data-eid":e.id});
     p.addEventListener("click",()=>inspect({kind:"cf_edge",data:e},p)); add(p);
   });
@@ -14902,25 +14949,25 @@ function renderAgent(){
         if(!d.layer) return;
         const src = d.layer==="grid"?twGridAnchor:twTrafAnchor;
         const off = (i-((lk.read_detail.length-1)/2))*46;
-        const p=el("path",{d:`M${src.x+off},${src.y} C${src.x+off},${(src.y+ap.y)/2} ${ap.x},${(src.y+ap.y)/2} ${ap.x},${ap.y+22}`,class:"read-arrow","marker-end":"url(#aRead)"}); add(p);
-        const t=el("text",{x:(src.x+off+ap.x)/2, y:(src.y+ap.y)/2-2, class:"channel-note",fill:"#16a34a","font-size":11,"text-anchor":"middle"}); t.textContent="读 "+d.label; add(t);
+        const p=el("path",{d:`M${src.x+off},${src.y} C${src.x+off},${(src.y+ap.y)/2} ${ap.x},${(src.y+ap.y)/2} ${ap.x},${ap.y+32}`,class:"read-arrow","marker-end":"url(#aRead)"}); add(p);
+        const t=el("text",{x:(src.x+off+ap.x)/2, y:(src.y+ap.y)/2-10, class:"channel-note",fill:"#16a34a","font-size":22,"text-anchor":"middle"}); t.textContent="读 "+d.label; add(t);
       });
       (lk.write_detail||[]).forEach((d,i)=>{
         if(!d.layer) return;
         const dst = d.layer==="grid"?twGridAnchor:twTrafAnchor;
         const off = (i-((lk.write_detail.length-1)/2))*46 + 18;
-        const p=el("path",{d:`M${ap.x+18},${ap.y+22} C${ap.x+18},${(dst.y+ap.y)/2} ${dst.x+off},${(dst.y+ap.y)/2} ${dst.x+off},${dst.y}`,class:"write-arrow","marker-end":"url(#aWrite)"}); add(p);
-        const t=el("text",{x:(ap.x+dst.x+off)/2, y:(dst.y+ap.y)/2+12, class:"channel-note",fill:"#ea580c","font-size":11,"text-anchor":"middle"}); t.textContent="写 "+d.label; add(t);
+        const p=el("path",{d:`M${ap.x+26},${ap.y+32} C${ap.x+26},${(dst.y+ap.y)/2} ${dst.x+off},${(dst.y+ap.y)/2} ${dst.x+off},${dst.y}`,class:"write-arrow","marker-end":"url(#aWrite)"}); add(p);
+        const t=el("text",{x:(ap.x+dst.x+off)/2, y:(dst.y+ap.y)/2+18, class:"channel-note",fill:"#ea580c","font-size":22,"text-anchor":"middle"}); t.textContent="写 "+d.label; add(t);
       });
     }
   } else {
-    const note=el("text",{x:VW/2, y:twBox.y-40, class:"channel-note","text-anchor":"middle","font-size":12.5}); note.textContent="↑ 点击任一代理,或点「▶ 走一遍决策」—— 看它从孪生体读什么量、又把什么写回去 ↓"; add(note);
+    const note=el("text",{x:VW/2, y:twBox.y-46, class:"channel-note","text-anchor":"middle","font-size":24}); note.textContent="点击专家代理,查看它读取什么、写回什么"; add(note);
   }
   // ----- cf nodes -----
   cfGraph && cfGraph.nodes.forEach(n=>{
     const p=CF.pos.get(n.id); if(!p)return;
     const isRoot=n.kind==="agent", isTool=n.kind==="tool";
-    const w=isRoot?210:(isTool?150:158), h=isRoot?42:36;
+    const w=isRoot?360:(isTool?300:335), h=isRoot?82:72;
     const firing = state.firingIdx>=0 && data.execution_order[state.firingIdx]===n.id;
     const rec = recordFor(n.id);
     const accepted = rec && rec.validation && rec.validation.accepted;
@@ -14933,8 +14980,7 @@ function renderAgent(){
       if(n.kind==="subagent") highlightInOrder(n.id);
       render(); });
     add(rect);
-    let lt=el("text",{x:p.x,y:p.y-3,class:"nlabel","font-size":11}); lt.textContent=n.label; add(lt);
-    let st=el("text",{x:p.x,y:p.y+10,class:"nlabel","font-size":9.5,fill:"#94a3b8"}); st.textContent=(n.metadata&&(n.metadata.agent_type||n.metadata.group))||n.kind; add(st);
+    let lt=el("text",{x:p.x,y:p.y,class:"nlabel","font-size":27,"font-weight":700}); lt.textContent=displayAgent(n.id); add(lt);
   });
 }
 
@@ -14985,7 +15031,7 @@ function renderToolbar(){
   if(state.chapter==="region" || state.chapter==="agent"){
     const rg=document.createElement("div"); rg.className="group"; rg.innerHTML="<b>区</b>";
     regions.forEach(r=>{ const ch=document.createElement("span"); ch.className="chip"+(r.region_id===state.focusRegion?" on":"");
-      ch.textContent=r.label; ch.addEventListener("click",()=>{ state.focusRegion=r.region_id; renderToolbar(); render(); }); rg.appendChild(ch); });
+      ch.textContent=regionLabel(r.region_id); ch.addEventListener("click",()=>{ state.focusRegion=r.region_id; renderToolbar(); render(); }); rg.appendChild(ch); });
     tb.appendChild(rg);
   }
   if(state.chapter==="region"){
@@ -15012,7 +15058,7 @@ function renderLegend(){
     <div class="row"><span class="swl" style="border-color:#2563eb"></span>配电线 &nbsp; <span class="swl" style="border-color:#0d9488"></span>路段车流</div>
     <div class="row"><span class="swl" style="border-color:#9333ea;border-style:dashed"></span>跨层耦合(站点)</div>
     <div class="row" style="margin-top:4px"><span class="sw" style="background:radial-gradient(circle,#dc2626,#fde047)"></span>内核越亮越大 = 当前承载量越高</div>
-    ${state.chapter==="agent"?'<div class="row"><span class="swl" style="border-color:#16a34a;border-style:dashed"></span>代理「读」孪生量 &nbsp; <span class="swl" style="border-color:#ea580c"></span>代理「写」回孪生</div>':''}`;
+    ${state.chapter==="agent"?'<div class="row"><span class="swl" style="border-color:#16a34a;border-style:dashed"></span>智能体读取孪生 &nbsp; <span class="swl" style="border-color:#ea580c"></span>智能体写回孪生</div>':''}`;
   }
 }
 
@@ -15026,8 +15072,8 @@ function inspect(entry, node){
 function renderMetrics(){
   const c=document.getElementById("metrics"); const rows=[];
   (data.geo_graphs||[]).forEach(g=>{ const m=g.metrics;
-    rows.push(`<div class="metric-row"><span>${g.region_id} / ${g.layer}</span><b>n=${m.node_count} e=${m.edge_count} ⟨k⟩=${m.avg_degree.toFixed(2)}${m.diameter!=null?" d="+m.diameter:""}</b></div>`); });
-  if(cfGraph){ const m=cfGraph.metrics; rows.push(`<div class="metric-row" style="margin-top:5px"><span>control_flow</span><b>n=${m.node_count} e=${m.edge_count} ⟨k⟩=${m.avg_degree.toFixed(2)} d=${m.diameter}</b></div>`); }
+    rows.push(`<div class="metric-row"><span>${regionLabel(g.region_id)} / ${displayLayer(g.layer)}</span><b>节点=${m.node_count} 边=${m.edge_count} 平均度=${m.avg_degree.toFixed(2)}${m.diameter!=null?" 直径="+m.diameter:""}</b></div>`); });
+  if(cfGraph){ const m=cfGraph.metrics; rows.push(`<div class="metric-row" style="margin-top:5px"><span>决策流</span><b>节点=${m.node_count} 边=${m.edge_count} 平均度=${m.avg_degree.toFixed(2)} 直径=${m.diameter}</b></div>`); }
   c.innerHTML=rows.join("");
 }
 function renderExecutionOrder(){
@@ -15037,11 +15083,11 @@ function renderExecutionOrder(){
     const accepted=r.validation&&r.validation.accepted;
     const conf=r.proposal&&r.proposal.confidence;
     const lk=links[r.agent_id]||{};
-    const rw=[(lk.reads||[]).length?"读 "+(lk.reads||[]).join("/"):"",(lk.writes||[]).length?"写 "+(lk.writes||[]).join("/"):""].filter(Boolean).join(" · ");
+    const rw=[(lk.reads||[]).length?"读 "+(lk.reads||[]).map(displayLayer).join("/"):"",(lk.writes||[]).length?"写 "+(lk.writes||[]).map(displayLayer).join("/"):""].filter(Boolean).join(" · ");
     return `<div class="order-item${i===state.firingIdx?" firing":""}${r.agent_id===state.selectedId?" selected":""}" data-agent="${r.agent_id}">
-      <div><div><b>${i+1}.</b> ${r.agent_id}</div>
-      <div class="meta">${r.proposal.proposal_type}${conf!=null?'<span class="conf"> · conf='+conf+'</span>':''}${rw?'<br><span style="color:#94a3b8">'+rw+'</span>':''}</div></div>
-      <div><span class="badge-sm ${grp}">${grp}</span> <span class="verdict ${accepted?'ok':'err'}">${accepted?'✓':'✗'}</span></div></div>`;
+      <div><div><b>${i+1}.</b> ${displayAgent(r.agent_id)}</div>
+      <div class="meta">${displayCapability(r.proposal.proposal_type)}${conf!=null?'<span class="conf"> · 置信度 '+conf+'</span>':''}${rw?'<br><span style="color:#94a3b8">'+rw+'</span>':''}</div></div>
+      <div><span class="badge-sm ${grp}">${displayGroup(grp)}</span> <span class="verdict ${accepted?'ok':'err'}">${accepted?'✓':'✗'}</span></div></div>`;
   }).join("");
   c.querySelectorAll("[data-agent]").forEach(it=>it.addEventListener("click",()=>{
     const aid=it.getAttribute("data-agent"); highlightInOrder(aid);
@@ -15052,7 +15098,7 @@ function renderExecutionOrder(){
 }
 function highlightInOrder(aid){ state.selectedId=aid; renderExecutionOrder(); }
 function renderErrors(){
-  const e=[...(data.errors.control_flow||[]).map(m=>['control_flow',m]),...(data.errors.geo||[]).map(m=>['geo',m])];
+  const e=[...(data.errors.control_flow||[]).map(m=>['决策流',m]),...(data.errors.geo||[]).map(m=>['物理拓扑',m])];
   const c=document.getElementById("errors");
   c.innerHTML = e.length? e.map(([s,m])=>`<div class="pill err">[${s}] ${m}</div>`).join("") : `<div class="pill ok">✓ 全部校验通过</div>`;
 }
@@ -15076,7 +15122,7 @@ function renderPlaybar(){
     pb.innerHTML=`<span class="label" id="stepLabel">未开始</span>
       <button class="primary" id="decisionBtn">▶ 走一遍决策</button>
       <button id="stopDecisionBtn">■ 停止</button>
-      <span class="meta">逐步播放:每个代理读孪生→预测/决策→写回孪生(被写的节点会闪一下)</span>`;
+      <span class="meta">逐步播放:每个专家代理读取孪生、生成预测或决策,并把结果写回孪生</span>`;
     document.getElementById("decisionBtn").addEventListener("click",playDecision);
     document.getElementById("stopDecisionBtn").addEventListener("click",()=>{ stopDecision(); render(); });
   } else { pb.style.display="none"; }
@@ -15103,7 +15149,7 @@ function playDecision(){
   state.decisionTimer=setInterval(()=>{
     if(i>=total){ stopDecision(); if(lab) lab.textContent="完成 ✓"; renderExecutionOrder(); render(); return; }
     state.firingIdx=i; state.selectedId=data.execution_order[i]; state.highlightAgentId=data.execution_order[i];
-    if(lab) lab.textContent=`第 ${i+1}/${total} 步: ${data.execution_order[i]}`;
+    if(lab) lab.textContent=`第 ${i+1}/${total} 步: ${displayAgent(data.execution_order[i])}`;
     renderExecutionOrder(); render(); i++;
   }, 900);
 }

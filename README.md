@@ -1,0 +1,74 @@
+# EV Charging — 电动汽车承载力提升场景
+
+国重课题一"孪智融合配电系统运行仿真软件"EV 充电方向代码仓库。
+
+## 当前协作入口
+
+本仓库以 OpenSpec 作为小组推进和验收的单一执行入口：
+
+1. 先阅读 `AGENTS.md`。
+2. 新成员按 `docs/Codex初始化与Fork开发流程.md` 完成 Codex、OpenSpec、fork 和远端初始化。
+3. 从 `openspec/changes/<change-id>/` 确认本次变更范围、设计、任务和验收标准。
+4. 按指向该 change/task 的 GitHub Issue，在个人 fork 建立短期分支，实现、验证后向主仓库提交 PR。
+
+正式进度安排由 lead 用于创建和验收 OpenSpec change；组员不需要绕过 spec 再从计划文档自行拆解工作。
+
+禁止直接在 `main` 或长期共享的 `sim` 分支上开展日常功能开发。具体提交、Review 和验收规则见 `CONTRIBUTING.md`。
+
+## 目录结构
+
+```
+EV_charging/
+├── docs/                        # 项目文档
+│   ├── 软件组接手总览.md          # 课题背景、里程碑、管理风险
+│   ├── 世界模型调研报告.md        # 工具路线调研与推荐架构
+│   ├── 世界模型原型设计书.md      # 原型模块职责、API、验收标准
+│   ├── 软件组双周推进模板.md      # 双周例会成员汇报模板
+│   ├── 仿真系统开发进度安排.md      # 正式计划的 GitHub 可读版本
+│   └── 汇报材料_调研进度_*.md    # 阶段性汇报材料
+├── ev_charging_v1/              # v1 研究代码与数据资产
+│   ├── Load Forecasting/        # EV 负荷预测与仿真脚本
+│   ├── 交通流数据/               # 原始交通流 xlsx 数据
+│   ├── data/                    # 区域/节点数据
+│   ├── docs/                    # v1 设计文档（孪生体、智能体设计）
+│   └── *.docx / *.pdf           # 研究报告与业务文档
+└── v2sim/                       # V2Sim 开源平台（BSD，东南大学）
+    ├── v2sim/                   # 核心库
+    ├── cases/                   # 示例场景
+    └── readme.md
+```
+
+## 快速定位
+
+| 你想做的事 | 去哪里看 |
+|---|---|
+| 了解课题约束和里程碑 | `docs/软件组接手总览.md` |
+| 查看正式进度与成果名称 | `docs/仿真系统开发进度安排.md` |
+| 查看当前推进范围和任务 | `openspec/changes/<change-id>/` |
+| 初始化 Codex 并建立个人 fork | `docs/Codex初始化与Fork开发流程.md` |
+| 了解分支、提交和 PR 规则 | `CONTRIBUTING.md` |
+| 了解世界模型技术路线 | `docs/世界模型调研报告.md` |
+| 了解原型接口与验收标准 | `docs/世界模型原型设计书.md` |
+| 查看已有 EV 仿真代码 | `ev_charging_v1/Load Forecasting/` |
+| 评估 V2Sim 开源能力 | `v2sim/readme.md` |
+| 写双周汇报 | `docs/软件组双周推进模板.md` |
+
+## 当前技术基线
+
+```
+配电网主仿真内核（待实测选型）
+                ↕
+Python 编排 / 统一接口 / 结果与评估层
+                ↕
+场景适配器（首个场景：电动汽车承载力提升）
+                ↑
+V2Sim EV 出行、交通、充电与车网互动能力按需复用
+```
+
+OpenDSS、GridLAB-D、pandapower/PowerModelsDistribution 等候选工具必须通过 OpenSpec change 完成验证和选型，现有调研推荐不直接视为最终决定。
+
+## 对应任务书
+
+课题一名称：融合数字孪生与人工智能的配电系统运行优化与安全校验体系架构构建技术
+
+当前首个端到端场景：**电动汽车承载力提升**。

@@ -1,0 +1,30 @@
+schema: spec-driven
+
+context: |
+  Project: 孪智融合配电系统运行架构方案评估模块。
+  Team: one software lead/spec owner plus two fixed implementation members.
+  Delivery strategy: EV carrying-capacity improvement is the first end-to-end scenario;
+  later scenarios reuse the same simulation, twin-agent interface, evaluation, and evidence framework.
+  Technical baseline: distribution-grid simulation kernel + Python orchestration/interface layer
+  + scenario adapters. V2Sim is an EV/traffic/charging capability source, not the whole system kernel.
+  Primary final documents: 软件需求分析报告、软件设计规格说明书、软件使用说明书。
+  Repository language: Chinese for project-facing documents; English identifiers in code.
+  Every accepted change must be traceable from schedule outcome to spec, issue, PR, tests, and evidence.
+
+rules:
+  proposal:
+    - Reference the formal schedule milestone and named research outcomes.
+    - State scope, non-goals, dependencies, owner role, and acceptance evidence.
+    - Keep one change small enough to review and accept within one to two weeks.
+  specs:
+    - Use SHALL or MUST for normative requirements.
+    - Give every requirement at least one concrete Scenario.
+    - Include traceability to the task-book intent or formal schedule outcome.
+    - Separate system behavior from research notes and implementation preferences.
+  design:
+    - Document reuse of current assets, module boundaries, data/interface contracts, risks, and rollback.
+    - Record unresolved decisions explicitly instead of silently selecting an implementation.
+  tasks:
+    - Assign every task to lead or member and name its Reviewer as lead or another member.
+    - Include artifact path or code scope plus a reproducible verification method.
+    - End with integration, documentation convergence, and lead acceptance tasks.

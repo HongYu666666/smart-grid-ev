@@ -26,6 +26,7 @@ env/
 
 # --- Editor / local tooling ---
 .claude/
+.opencode/
 .vscode/
 .idea/
 *.swp
