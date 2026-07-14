@@ -150,7 +150,7 @@ git switch -c research/<issue编号>-<简短名称>
 ```text
 你在我的 smart-grid-ev fork 中处理 GitHub Issue #<编号>。
 主仓库是 TsLouis/smart-grid-ev，当前 OpenSpec change 是 <change-id>，
-我的角色是 <member-a|member-b>。
+我的角色是 member（组员）。
 
 请先读取 AGENTS.md、CONTRIBUTING.md、Issue 和该 change 下的全部文件，
 再检查当前分支、origin/upstream 和工作区。先说明范围、拟修改文件、证据和验证方式，

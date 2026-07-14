@@ -25,6 +25,6 @@ rules:
     - Document reuse of current assets, module boundaries, data/interface contracts, risks, and rollback.
     - Record unresolved decisions explicitly instead of silently selecting an implementation.
   tasks:
-    - Assign every task to lead, member-a, or member-b and name its Reviewer.
+    - Assign every task to lead or member and name its Reviewer as lead or another member.
     - Include artifact path or code scope plus a reproducible verification method.
     - End with integration, documentation convergence, and lead acceptance tasks.

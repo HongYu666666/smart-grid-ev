@@ -13,13 +13,12 @@
 
 没有已批准 OpenSpec change 和对应 Issue 时，不开始新的功能实现。发现需求不清或范围冲突时，先在 Issue 中记录并交由软件负责人裁定。
 
-## 三人职责
+## 两类职责
 
 - `lead`（软件负责人）：维护计划与 OpenSpec、拆分任务、处理接口决策，承担少量集成/文档工作并最终验收。原则上不包办组员模块。
-- `member-a`：配电网/交通/电动汽车仿真、数据模型、场景适配和运行内核。
-- `member-b`：孪智交互接口、智能体编排、结果管理、可视化与自动化测试。
+- `member`（两名组员）：共同承担调研、实现、测试和证据整理，自行协商具体分工，不在仓库规则中预先固定技术方向。
 
-具体人员姓名和当前任务以 `docs/项目推进与分工.md` 及 GitHub Issue 为准。模块边界允许按里程碑调整，但每个 Issue 只能有一个直接负责人和一个 Reviewer。
+当前任务以 `docs/项目推进与分工.md` 及 GitHub Issue 为准。组员身份由后续 Git 提交和 PR 自然记录，不在计划中登记姓名或账号。每个 Issue 仍应有一个当次直接负责人，另一名组员或 lead 负责 Review。
 
 ## Codex 开工顺序
 
@@ -37,7 +36,7 @@
 
 ```text
 请先阅读 AGENTS.md、GitHub Issue #<编号> 和
-openspec/changes/<change-id>/ 下的全部文件。只处理分配给 <member-a|member-b|lead>
+openspec/changes/<change-id>/ 下的全部文件。只处理分配给 <member|lead>
 的未完成任务。先检查分支与工作区，再说明拟修改文件、验收标准和验证命令；
 完成后更新 tasks.md，运行验证并准备符合模板的 commit/PR，不要扩大范围。
 ```

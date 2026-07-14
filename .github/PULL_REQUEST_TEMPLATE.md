@@ -3,7 +3,7 @@
 - Closes #
 - OpenSpec change：
 - 完成 tasks：
-- 负责人角色：`lead` / `member-a` / `member-b`
+- 负责人角色：`lead` / `member`
 - Reviewer：
 
 ## 交付结果

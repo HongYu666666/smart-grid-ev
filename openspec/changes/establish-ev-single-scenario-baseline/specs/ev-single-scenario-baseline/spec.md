@@ -15,7 +15,7 @@
 《软件需求分析报告》和场景调研报告 SHALL 共同定义电动汽车承载力提升场景的参与对象、输入数据、状态、事件、控制动作、物理/业务约束、评价指标、正常流程、异常流程和系统边界。内容 MUST 区分已具备资产、待验证假设和后续实现需求。
 
 #### Scenario: 组员准备设计数据模型
-- **WHEN** `member-a` 根据需求基线开始统一数据模型 change
+- **WHEN** 组员根据需求基线开始统一数据模型 change
 - **THEN** 能从三项成果中找到每类核心对象的输入、状态、动作、约束和指标，而不需要自行猜测业务语义
 
 #### Scenario: 研究材料包含未验证结论
@@ -44,8 +44,8 @@
 - **WHEN** 需求涉及 OpenDSS、GridLAB-D、pandapower 或 PowerModelsDistribution 的具体采用决定
 - **THEN** 将该决定留给后续 `select-grid-simulation-backend` change，并只在本阶段记录选择约束和评价标准
 
-### Requirement: 三人成果经过独立 Review 和负责人验收
-`lead`、`member-a`、`member-b` MUST 各自交付 tasks 中分配的成果。组员成果 SHALL 交叉 Review，lead 的成果 SHALL 至少由一名组员 Review；只有 lead 可以将整个 change 标记为已验收。
+### Requirement: 两类职责成果经过独立 Review 和负责人验收
+`lead` 与 `member` MUST 分别交付 tasks 中分配的成果。组员可自行协作分工，但每个成果 SHALL 由非直接作者或 lead Review；lead 的成果 SHALL 至少由一名组员 Review。只有 lead 可以将整个 change 标记为已验收。
 
 #### Scenario: 实现者完成自己的成果
 - **WHEN** 任一角色完成文档或映射表并提交 PR

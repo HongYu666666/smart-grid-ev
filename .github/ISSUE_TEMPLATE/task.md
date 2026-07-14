@@ -13,7 +13,7 @@ assignees: ""
 - OpenSpec change：
 - OpenSpec task 编号：
 - 正式进度安排条目：
-- 负责人角色：`lead` / `member-a` / `member-b`
+- 负责人角色：`lead` / `member`
 - Reviewer：
 - 期望完成时间（可选，不作为每日排期）：
 

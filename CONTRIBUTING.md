@@ -1,6 +1,6 @@
 # 协作与提交指南
 
-本仓库由软件负责人、组员 A、组员 B 三人协作，默认使用 Codex 辅助实现。本文规定从领任务到验收的完整流程；项目范围与 Codex 强制规则另见 `AGENTS.md`。
+本仓库由软件负责人和两名组员协作，管理上只区分 `lead` 与 `member` 两类职责，默认使用 Codex 辅助实现。本文规定从领任务到验收的完整流程；项目范围与 Codex 强制规则另见 `AGENTS.md`。
 
 ## 1. 开工前
 
@@ -33,7 +33,7 @@ openspec status --change <change-id>
 
 ```text
 你在 smart-grid-ev 仓库处理 GitHub Issue #<编号>，OpenSpec change 是
-<change-id>，我的角色是 <member-a|member-b|lead>。请完整阅读 AGENTS.md、
+<change-id>，我的角色是 <member|lead>。请完整阅读 AGENTS.md、
 Issue 和 change 文件，只实现 tasks.md 中分配给我的任务。开工前报告影响范围和
 验证方式；完成后更新任务勾选、运行验证、检查 diff，并给出建议 commit 和 PR 内容。
 ```
