@@ -6,19 +6,19 @@
 ## 2. 软件需求分析报告
 
 - [ ] 2.1 `lead`（Reviewer: `member`）完成 `docs/deliverables/软件需求分析报告.md` 的引言和综合描述，写清建设目标、系统边界、参与者、运行环境、约束、假设和非目标；验证：与正式计划技术基线无冲突。
-- [ ] 2.2 `lead`（Reviewer: `member`）完成单场景需求章节，覆盖对象、输入、状态、事件、动作、约束、指标、正常/异常流程以及已验证/规划中状态；验证：所有 `REQ-EV-*` 均有验收方式且不存在重复编号。
+- [ ] 2.2 `lead`（Reviewer: `member`）完成单场景需求章节，覆盖对象、输入、状态、事件、动作、约束、指标、正常/异常流程以及新系统目标状态；参考代码库复现状态单独记录，不计入新系统完成度；验证：所有 `REQ-EV-*` 均有验收方式且不存在重复编号。
 
 ## 3. 电动汽车承载力提升场景调研
 
-- [ ] 3.1 `member`（Reviewer: `lead` 或另一名组员）盘点现有 EV 研究材料、`ev_charging_v1/` 和 V2Sim 案例，将能力分为已验证、部分具备、规划中、待裁定；成果：`docs/deliverables/电动汽车承载力提升场景调研报告.md`；验证：每项“已验证”能力具有命令或文件锚点。
+- [ ] 3.1 `member`（Reviewer: `lead` 或另一名组员）盘点现有 EV 研究材料、`ev_charging_v1/`、V2Sim 和后续调研项目，将其作为参考代码库分类为已复现、部分可参考、待调研、不适用；成果：`docs/deliverables/电动汽车承载力提升场景调研报告.md`；验证：每项“已复现”参考能力具有命令或文件锚点，且没有写成新系统已实现能力。
 - [ ] 3.2 `member`（Reviewer: `lead` 或另一名组员）补全场景业务流程、对象/数据、控制动作、物理与业务约束、评价指标、异常情形和数据缺口；验证：内容能支撑后续工具选型与统一数据模型 change，且未提前决定配电网主仿真工具。
-- [ ] 3.3 `member`（Reviewer: `lead` 或另一名组员）复现并记录当前原型基线；在 `ev_charging_v1/` 执行 `python -m smart_grid_core.tools.root_step_check --root .` 和 `python -m smart_grid_core.tools.parity_report --root .`，把命令、环境和结果摘要写入调研报告。
+- [ ] 3.3 `member`（Reviewer: `lead` 或另一名组员）复现并记录 v1 参考项目，不称其为新系统原型或基线；在 `ev_charging_v1/` 执行 `python -m smart_grid_core.tools.root_step_check --root .` 和 `python -m smart_grid_core.tools.parity_report --root .`，把命令、环境、结果摘要和“仅供参考、不计入新系统验收”的结论写入调研报告。
 
 ## 4. 场景-业务需求-孪智功能映射
 
 - [x] 4.1 `lead`（Reviewer: `member`）创建 `docs/deliverables/典型场景-业务需求-孪智功能映射表.md`，至少包含 design.md 定义的 11 个共同字段；验证：所有 `REQ-EV-*` 在映射表中至少出现一次。
-- [x] 4.2 `lead`（Reviewer: `member`）逐行区分孪生体、智能体、工具/模型组件责任，补充动作校验、拒绝/回退和证据状态；验证：不存在把确定性工具直接标为独立智能体的行。
-- [x] 4.3 `lead`（Reviewer: `member`）将现有 `smart_grid_core` 编排、孪生体和拓扑资产映射到需求行，并对尚未具备的能力标记“规划中”；验证：代码能力声明包含仓库相对路径或复现命令。
+- [x] 4.2 `lead`（Reviewer: `member`）逐行区分新系统孪生体、智能体、工具/模型组件责任，补充动作校验、拒绝/回退、新系统证据和目标状态；验证：不存在把确定性工具直接标为独立智能体的行，也不存在用参考项目结果代替新系统证据的行。
+- [x] 4.3 `lead`（Reviewer: `member`）将 `ev_charging_v1/`、V2Sim 和后续项目作为参考资产映射到需求 ID，并与新系统目标组件、证据和状态分栏记录；验证：参考声明包含仓库相对路径或复现命令，所有尚未独立实现的新系统能力标记为“规划中”或“待裁定”。
 
 ## 5. 交叉 Review 与一致性收敛
 
