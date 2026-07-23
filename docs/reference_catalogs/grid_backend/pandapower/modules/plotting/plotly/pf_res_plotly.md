@@ -1,0 +1,7 @@
+# `pandapower.plotting.plotly.pf_res_plotly`
+
+本模块共记录 1 个函数、类或方法。
+
+| kind | qualified_name | signature | source_anchor | summary | inputs_outputs | side_effects | dependencies | development_relevance | evidence_status | review_status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| function | pandapower.plotting.plotly.pf_res_plotly.pf_res_plotly | (net: pandapowerNet, cmap: str='Jet', use_line_geo=None, on_map: bool=False, projection: int \| None=None, map_style: str='basic', figsize: int=1, aspectratio: str='auto', line_width: int=2, bus_size: int=10, climits_volt: tuple[float, float]=(0.9, 1.1), climits_load: tuple[float, float]=(0, 100), cpos_volt: float=1.0, cpos_load: float=1.1, filename: str='temp-plot.html', auto_open: bool=True, power_unit: Literal['', 'k', 'M']='M', current_unit: Literal['', 'k']='k', voltage_unit: Literal['', 'k']='k', zoomlevel: int=11) | pandapower/plotting/plotly/pf_res_plotly.py#L23 | Plots a pandapower network in plotly | 输入：net, cmap, use_line_geo, on_map, projection, map_style, figsize, aspectratio, line_width, bus_size, climits_volt, climits_load, cpos_volt, cpos_load, filename, auto_open, power_unit, current_unit, voltage_unit, zoomlevel；输出：返回值未注解 | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | tolist；pd.Series；create_bus_trace；create_line_trace；create_trafo_trace；draw_traces；logger.warning；runpp；any；create_generic_coordinates；convert_crs；len；net.line.geo.isna；net.bus.geo.isna；net.get；astype | 仅内部参考：不进入首轮后端适配器 | 源码确认（静态 AST） | 自动生成 |

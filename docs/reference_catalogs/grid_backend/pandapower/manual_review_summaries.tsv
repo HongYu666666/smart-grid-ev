@@ -1,0 +1,38 @@
+# qualified_name<TAB>人工复核后的功能摘要
+pandapower.auxiliary.pandapowerNet	以属性/字典两种方式承载母线、线路、负荷、控制器及结果 DataFrame 的可变网络对象，是适配器读写 pandapower 数据的中心状态容器。
+pandapower.create.network_create.create_empty_network	按频率和基准容量创建空 pandapowerNet、初始化结构表/标准类型并清空各求解模式结果表。
+pandapower.create.bus_create.create_bus	校验索引后向 net.bus 写入一个交流母线及电压边界、区域和地理信息，返回母线索引。
+pandapower.create.ext_grid_create.create_ext_grid	校验母线后向 net.ext_grid 写入外部电网/平衡节点及短路和功率边界，返回元件索引。
+pandapower.create.line_create.create_line	从标准类型库读取参数并向 net.line 写入线路、载流和温度相关字段，返回线路索引。
+pandapower.create.line_create.create_line_from_parameters	使用显式正/零序电气参数创建线路并写入 net.line，适合统一数据模型到求解器表的适配。
+pandapower.create.load_create.create_load	向指定母线写入有功、无功、ZIP 比例和可控边界等负荷字段，返回负荷索引。
+pandapower.run.runpp	配置并执行平衡交流潮流，可串接控制器；就地更新收敛标志、内部 ppc 和结果表，失败通过 pandapower 异常上报。
+pandapower.run.rundcpp	配置并执行直流潮流，就地更新网络内部状态和结果表；不提供电压幅值/无功校核，不能替代 EV 场景交流安全校验。
+pandapower.pf.runpp_3ph.runpp_3ph	执行不平衡/三相潮流并写入三相结果表，要求零序参数完整，适合作为三相 PoC 而非首轮最小适配入口。
+pandapower.auxiliary._add_ppc_options	把网络转换、公差和模式等公共选项写入 net._options，供 pd2ppc 与后续求解链读取。
+pandapower.auxiliary._add_pf_options	把潮流算法、初始化、迭代、连通性、限值和温度等选项写入 net._options。
+pandapower.auxiliary._init_runpp_options	校验 runpp 参数并组合公共/潮流选项，是外部求解参数进入内部选项字典的边界。
+pandapower.pd2ppc._pd2ppc	把 pandapower 元件表转换为完整 ppc 和只含在役元件的 ppci，并建立结果回写所需查找表。
+pandapower.powerflow._powerflow	重置状态、校验结果表、执行 pd2ppc 和求解器，再把 ppci 结果回写到 pandapower 结果表。
+pandapower.pf.run_newton_raphson_pf._run_newton_raphson_pf	按 options 执行 Newton-Raphson 交流潮流主链，处理复用、分布式平衡和结果状态。
+pandapower.results_bus._get_bus_results	从 ppc 提取母线电压、功率等结果并写入对应结果表，是统一结果适配的重要锚点。
+pandapower.results_branch._get_branch_results	从 ppc/查找表提取线路、变压器等支路结果并写入结果表。
+pandapower.control.run_control.prepare_run_ctrl	汇总控制器顺序、求解函数、初始求解、异常类型和发散处理选项，形成控制循环运行上下文。
+pandapower.control.run_control.check_final_convergence	检查控制迭代上限和网络收敛状态，并分别抛出控制不收敛或网络计算不收敛异常。
+pandapower.control.run_control.net_initialization	按控制上下文决定是否先运行一次网络计算，并把网络/OPF 收敛状态写回控制变量。
+pandapower.control.run_control.control_initialization	按 level/order 遍历控制器并调用 initialize_control，直接影响控制器持有的网络与内部状态。
+pandapower.control.run_control._evaluate_net	执行一次网络计算；按策略传播求解异常或给予控制器一次 repair_control 后重试机会。
+pandapower.control.run_control.control_implementation	逐层执行收敛检查、控制动作和网络重算，超过迭代上限或网络不收敛时触发显式异常。
+pandapower.control.run_control.control_finalization	按控制器顺序调用 finalize_control，完成控制循环后的状态收尾。
+pandapower.control.run_control.run_control	组织控制器初始化、初始潮流、分层迭代和收尾，是动作执行与潮流反馈闭环的主入口。
+pandapower.timeseries.run_time_series.init_time_series	初始化时间步、输出写入器、求解复用策略和控制上下文，返回时序循环变量。
+pandapower.timeseries.run_time_series.cleanup	在时序运行前后清除可复用的内部 ppc，防止拓扑或在役状态变化后复用陈旧求解状态。
+pandapower.timeseries.run_time_series._call_output_writer	把当前时间步的潮流/控制收敛状态交给 OutputWriter，形成时序结果持久化入口。
+pandapower.timeseries.run_time_series.run_time_step	完成单个时间步的控制更新、网络重算、异常状态记录和输出写入。
+pandapower.timeseries.run_time_series.run_loop	逐时间步调用 run_time_step，推进控制器、求解器与输出写入器，是准静态时序的循环入口。
+pandapower.timeseries.run_time_series.run_timeseries	组织时序初始化、前后清理、控制诊断和逐步运行，可将发散策略与替代求解函数传入。
+pandapower.results.reset_results	按求解模式用空表重置全部相关结果并删除 res_cost，避免跨实验残留结果被误读。
+pandapower.results.verify_results	核对元件表与结果表索引；不一致时重建结果表，母线结果初始化冲突时抛出警告。
+pandapower.auxiliary.ppException	pandapower 自定义异常的共同基类，适配器可据此统一封装后端错误。
+pandapower.auxiliary.LoadflowNotConverged	表示潮流未收敛；新系统应转换为结构化求解失败并保留配置、输入和迭代上下文。
+pandapower.auxiliary.AlgorithmUnknown	源码注释与类名语义不一致；在追踪实际抛出点前不得映射为确定的“算法不支持”错误。

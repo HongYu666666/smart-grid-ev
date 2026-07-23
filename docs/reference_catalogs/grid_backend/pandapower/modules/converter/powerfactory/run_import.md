@@ -1,0 +1,11 @@
+# `pandapower.converter.powerfactory.run_import`
+
+本模块共记录 5 个函数、类或方法。
+
+| kind | qualified_name | signature | source_anchor | summary | inputs_outputs | side_effects | dependencies | development_relevance | evidence_status | review_status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| function | pandapower.converter.powerfactory.run_import.choose_imp_dir | (user, IMPFOLD) | pandapower/converter/powerfactory/run_import.py#L17 | 待人工补充：源码未提供可直接确认的功能说明；需结合 pandapower.converter.powerfactory.run_import.choose_imp_dir 的实现与调用链确认。 | 输入：user, IMPFOLD；输出：返回值未注解 | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | user.GetContents；len；user.CreateObject | 需要适配：可作为新系统数据模型、求解、控制或错误契约的参考 | 源码确认（静态 AST） | 自动生成 |
+| function | pandapower.converter.powerfactory.run_import.clear_dir | (dir) | pandapower/converter/powerfactory/run_import.py#L26 | 待人工补充：源码未提供可直接确认的功能说明；需结合 pandapower.converter.powerfactory.run_import.clear_dir 的实现与调用链确认。 | 输入：dir；输出：返回值未注解 | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | dir.GetContents；item.Delete | 需要适配：可作为新系统数据模型、求解、控制或错误契约的参考 | 源码确认（静态 AST） | 自动生成 |
+| function | pandapower.converter.powerfactory.run_import.prj_dgs_import | (com_import, dst_user_dir, file_name, name, template=None) | pandapower/converter/powerfactory/run_import.py#L8 | 待人工补充：源码未提供可直接确认的功能说明；需结合 pandapower.converter.powerfactory.run_import.prj_dgs_import 的实现与调用链确认。 | 输入：com_import, dst_user_dir, file_name, name, template；输出：返回值未注解 | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | com_import.Execute | 需要适配：可作为新系统数据模型、求解、控制或错误契约的参考 | 源码确认（静态 AST） | 自动生成 |
+| function | pandapower.converter.powerfactory.run_import.prj_import | (com_import, dst_user_dir, file_name) | pandapower/converter/powerfactory/run_import.py#L1 | 待人工补充：源码未提供可直接确认的功能说明；需结合 pandapower.converter.powerfactory.run_import.prj_import 的实现与调用链确认。 | 输入：com_import, dst_user_dir, file_name；输出：返回值未注解 | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | com_import.Execute | 需要适配：可作为新系统数据模型、求解、控制或错误契约的参考 | 源码确认（静态 AST） | 自动生成 |
+| function | pandapower.converter.powerfactory.run_import.run_ldf | (com_ldf) | pandapower/converter/powerfactory/run_import.py#L32 | 待人工补充：源码未提供可直接确认的功能说明；需结合 pandapower.converter.powerfactory.run_import.run_ldf 的实现与调用链确认。 | 输入：com_ldf；输出：返回值未注解 | 静态扫描未确认外部副作用；运行态副作用仍需在 PoC 中复核 | com_ldf.SetAttribute；com_ldf.Execute | 需要适配：可作为新系统数据模型、求解、控制或错误契约的参考 | 源码确认（静态 AST） | 自动生成 |

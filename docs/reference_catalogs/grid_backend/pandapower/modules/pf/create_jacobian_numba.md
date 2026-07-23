@@ -1,0 +1,9 @@
+# `pandapower.pf.create_jacobian_numba`
+
+本模块共记录 3 个函数、类或方法。
+
+| kind | qualified_name | signature | source_anchor | summary | inputs_outputs | side_effects | dependencies | development_relevance | evidence_status | review_status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| function | pandapower.pf.create_jacobian_numba.create_J | (dVm_x, dVa_x, Yp, Yj, pvpq_lookup, refpvpq, pvpq, pq, Jx, Jj, Jp, slack_weights) | pandapower/pf/create_jacobian_numba.py#L23 | Calculates Jacobian faster with numba and sparse matrices. | 输入：dVm_x, dVa_x, Yp, Yj, pvpq_lookup, refpvpq, pvpq, pq, Jx, Jj, Jp, slack_weights；输出：返回值未注解 | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | jit；len；range | 需要适配：可作为新系统数据模型、求解、控制或错误契约的参考 | 源码确认（静态 AST） | 自动生成 |
+| function | pandapower.pf.create_jacobian_numba.create_J2 | (dVm_x, dVa_x, Yp, Yj, pvpq_lookup, refpvpq, pvpq, pq, Jx, Jj, Jp, slack_weights) | pandapower/pf/create_jacobian_numba.py#L112 | Calculates Jacobian faster with numba and sparse matrices. This version is similar to create_J except that if pvpq = pq (when no pv bus is available) some if statements are obsolete and J11 = J12 and J21 = J22 | 输入：dVm_x, dVa_x, Yp, Yj, pvpq_lookup, refpvpq, pvpq, pq, Jx, Jj, Jp, slack_weights；输出：返回值未注解 | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | jit；len；range | 需要适配：可作为新系统数据模型、求解、控制或错误契约的参考 | 源码确认（静态 AST） | 自动生成 |
+| function | pandapower.pf.create_jacobian_numba.create_J_ds | (dVm_x, dVa_x, Yp, Yj, pvpq_lookup, refpvpq, pvpq, pq, Jx, Jj, Jp, slack_weights) | pandapower/pf/create_jacobian_numba.py#L178 | Calculates Jacobian faster with numba and sparse matrices. | 输入：dVm_x, dVa_x, Yp, Yj, pvpq_lookup, refpvpq, pvpq, pq, Jx, Jj, Jp, slack_weights；输出：返回值未注解 | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | jit；len；range | 需要适配：可作为新系统数据模型、求解、控制或错误契约的参考 | 源码确认（静态 AST） | 自动生成 |
