@@ -1,0 +1,8 @@
+# `pandapower.create.switch_create`
+
+本模块共记录 2 个函数、类或方法。
+
+| kind | qualified_name | signature | source_anchor | summary | inputs_outputs | side_effects | dependencies | development_relevance | evidence_status | review_status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| function | pandapower.create.switch_create.create_switch | (net: pandapowerNet, bus: Int, element: Int, et: SwitchElementType, closed: bool=True, type: SwitchType \| None=None, name: str \| None=None, index: Int \| None=None, z_ohm: float=0, in_ka: float=nan, **kwargs) -> Int | pandapower/create/switch_create.py#L28 | Adds a switch in the net["switch"] table. | 输入：net, bus, element, et, closed, type, name, index, z_ohm, in_ka, **kwargs；输出：Int | 静态扫描未确认外部副作用；运行态副作用仍需在 PoC 中复核 | _check_element；_get_index_with_check；_set_entries；UserWarning | 需要适配：可作为新系统数据模型、求解、控制或错误契约的参考 | 源码确认（静态 AST） | 自动生成 |
+| function | pandapower.create.switch_create.create_switches | (net: pandapowerNet, buses: Sequence, elements: Sequence, et: SwitchElementType \| Sequence[str], closed: bool \| Iterable[bool]=True, type: SwitchType \| None=None, name: Iterable[str] \| None=None, index: Int \| Iterable[Int] \| None=None, z_ohm: float=0, in_ka: float=nan, **kwargs) -> Int | pandapower/create/switch_create.py#L137 | Adds a switch in the net["switch"] table. | 输入：net, buses, elements, et, closed, type, name, index, z_ohm, in_ka, **kwargs；输出：Int | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | _get_multiple_index_with_check；_check_multiple_elements；np.any；np.array；_set_multiple_entries；len；np.isin；UserWarning；np_any；isinstance；zip；tolist；table.capitalize；list | 需要适配：可作为新系统数据模型、求解、控制或错误契约的参考 | 源码确认（静态 AST） | 自动生成 |

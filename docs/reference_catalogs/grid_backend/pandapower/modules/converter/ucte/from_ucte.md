@@ -1,0 +1,9 @@
+# `pandapower.converter.ucte.from_ucte`
+
+本模块共记录 3 个函数、类或方法。
+
+| kind | qualified_name | signature | source_anchor | summary | inputs_outputs | side_effects | dependencies | development_relevance | evidence_status | review_status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| function | pandapower.converter.ucte.from_ucte.average_voltage_setpoints | (net: pandapowerNet) -> None | pandapower/converter/ucte/from_ucte.py#L76 | Adjust generator voltage setpoints by averaging vm_pu for generators that appear to represent the same physical voltage setpoint across connected buses. | 输入：net；输出：None | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | tolist；net.gen.drop；list；len；dropna；get_connected_buses；mean；set；apply；net.gen.bus.isin；net.gen.name.isin；net.gen.groupby | 需要适配：可作为新系统数据模型、求解、控制或错误契约的参考 | 源码确认（静态 AST） | 自动生成 |
+| function | pandapower.converter.ucte.from_ucte.from_ucte | (ucte_file: str, slack_as_gen: bool=True, clip_small_x_values: bool=False, harmonize_voltage_setpoints: bool=False) -> pandapowerNet | pandapower/converter/ucte/from_ucte.py#L32 | Converts net data stored as an UCTE file to a pandapower net. | 输入：ucte_file, slack_as_gen, clip_small_x_values, harmonize_voltage_setpoints；输出：pandapowerNet | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | time.time；UCTEParser；ucte_parser.parse_file；from_ucte_dict；logger.info；average_voltage_setpoints | 需要适配：可作为新系统数据模型、求解、控制或错误契约的参考 | 源码确认（静态 AST） | 自动生成 |
+| function | pandapower.converter.ucte.from_ucte.from_ucte_dict | (ucte_parser: UCTEParser, slack_as_gen: bool=True, clip_small_x_values: bool=True) -> pandapowerNet | pandapower/converter/ucte/from_ucte.py#L16 | Creates a pandapower net from an UCTE data structure. | 输入：ucte_parser, slack_as_gen, clip_small_x_values；输出：pandapowerNet | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | UCTE2pandapower；ucte_converter.convert；ucte_parser.get_data | 需要适配：可作为新系统数据模型、求解、控制或错误契约的参考 | 源码确认（静态 AST） | 自动生成 |

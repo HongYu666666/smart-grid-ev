@@ -1,0 +1,11 @@
+# `pandapower.pypower.makeBdc`
+
+本模块共记录 5 个函数、类或方法。
+
+| kind | qualified_name | signature | source_anchor | summary | inputs_outputs | side_effects | dependencies | development_relevance | evidence_status | review_status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| function | pandapower.pypower.makeBdc.calc_b_from_branch | (branch, nl) | pandapower/pypower/makeBdc.py#L141 | 待人工补充：源码未提供可直接确认的功能说明；需结合 pandapower.pypower.makeBdc.calc_b_from_branch 的实现与调用链确认。 | 输入：branch, nl；输出：返回值未注解 | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | errstate；real；zeros_like；divide；ones；find | 可参考：是否进入适配器边界由后续 PoC 决定 | 源码确认（静态 AST） | 自动生成 |
+| function | pandapower.pypower.makeBdc.calc_b_from_branch_dc | (branch) | pandapower/pypower/makeBdc.py#L157 | 待人工补充：源码未提供可直接确认的功能说明；需结合 pandapower.pypower.makeBdc.calc_b_from_branch_dc 的实现与调用链确认。 | 输入：branch；输出：返回值未注解 | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | errstate；real；zeros_like；divide | 可参考：是否进入适配器边界由后续 PoC 决定 | 源码确认（静态 AST） | 自动生成 |
+| function | pandapower.pypower.makeBdc.calc_b_from_vsc_dc | (vsc) | pandapower/pypower/makeBdc.py#L166 | 待人工补充：源码未提供可直接确认的功能说明；需结合 pandapower.pypower.makeBdc.calc_b_from_vsc_dc 的实现与调用链确认。 | 输入：vsc；输出：返回值未注解 | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | errstate；real；zeros_like；divide | 可参考：是否进入适配器边界由后续 PoC 决定 | 源码确认（静态 AST） | 自动生成 |
+| function | pandapower.pypower.makeBdc.makeBdc | (bus: NDArray[float64], branch: NDArray[float64], bus_dc: NDArray[float64] \| None=None, branch_dc: NDArray[float64] \| None=None, vsc: NDArray[float64] \| None=None, return_csr: bool=True) | pandapower/pypower/makeBdc.py#L29 | Builds the B matrices and phase shift injections for DC power flow. | 输入：bus, branch, bus_dc, branch_dc, vsc, return_csr；输出：返回值未注解 | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | any；calc_b_from_branch；calc_b_from_vsc_dc；calc_b_from_branch_dc；astype；sparse；np.concatenate；phase_shift_injection；np.empty；logger.error；list；real；range；np.zeros；ones | 可参考：是否进入适配器边界由后续 PoC 决定 | 源码确认（静态 AST） | 自动生成 |
+| function | pandapower.pypower.makeBdc.phase_shift_injection | (b, shift, Cft) | pandapower/pypower/makeBdc.py#L131 | 待人工补充：源码未提供可直接确认的功能说明；需结合 pandapower.pypower.makeBdc.phase_shift_injection 的实现与调用链确认。 | 输入：b, shift, Cft；输出：返回值未注解 | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | 静态扫描未发现直接函数调用 | 可参考：是否进入适配器边界由后续 PoC 决定 | 源码确认（静态 AST） | 自动生成 |

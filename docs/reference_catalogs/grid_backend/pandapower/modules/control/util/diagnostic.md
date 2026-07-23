@@ -1,0 +1,10 @@
+# `pandapower.control.util.diagnostic`
+
+本模块共记录 4 个函数、类或方法。
+
+| kind | qualified_name | signature | source_anchor | summary | inputs_outputs | side_effects | dependencies | development_relevance | evidence_status | review_status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| function | pandapower.control.util.diagnostic.control_diagnostic | (net, respect_in_service=True) | pandapower/control/util/diagnostic.py#L20 | Diagnostic function to find obvious mistakes in control data | 输入：net, respect_in_service；输出：返回值未注解 | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | list；get_controller_index；issubclass；deepcopy；len；logger.info；type；indices.remove；trafo_ctrl.remove；str | 需要适配：可作为新系统数据模型、求解、控制或错误契约的参考 | 源码确认（静态 AST） | 自动生成 |
+| function | pandapower.control.util.diagnostic.q_capability_curve_table_diagnostic | (net, element) | pandapower/control/util/diagnostic.py#L203 | 待人工补充：源码未提供可直接确认的功能说明；需结合 pandapower.control.util.diagnostic.q_capability_curve_table_diagnostic 的实现与调用链确认。 | 输入：net, element；输出：返回值未注解 | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | logger.info；temp.merge；dropna；warnings.warn；all；curve_df.count；any；len；issubset；isin；curve_df.isin；notna；isna | 需要适配：可作为新系统数据模型、求解、控制或错误契约的参考 | 源码确认（静态 AST） | 自动生成 |
+| function | pandapower.control.util.diagnostic.shunt_characteristic_table_diagnostic | (net) | pandapower/control/util/diagnostic.py#L150 | 待人工补充：源码未提供可直接确认的功能说明；需结合 pandapower.control.util.diagnostic.shunt_characteristic_table_diagnostic 的实现与调用链确认。 | 输入：net；输出：返回值未注解 | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | logger.info；temp.merge；warnings.warn；dropna；all；len；any；isin；notna；isna | 需要适配：可作为新系统数据模型、求解、控制或错误契约的参考 | 源码确认（静态 AST） | 自动生成 |
+| function | pandapower.control.util.diagnostic.trafo_characteristic_table_diagnostic | (net) | pandapower/control/util/diagnostic.py#L67 | 待人工补充：源码未提供可直接确认的功能说明；需结合 pandapower.control.util.diagnostic.trafo_characteristic_table_diagnostic 的实现与调用链确认。 | 输入：net；输出：返回值未注解 | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | logger.info；zip；temp.merge；warnings.warn；dropna；all；len；any；isin；isna；notna | 需要适配：可作为新系统数据模型、求解、控制或错误契约的参考 | 源码确认（静态 AST） | 自动生成 |

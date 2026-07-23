@@ -14,12 +14,12 @@
 
 ## 3. Part A：lead 完成配电网仿真工具选型与验证报告
 
-- [ ] 3.1 lead（Reviewer: member）在 `docs/deliverables/配电网仿真工具选型与验证报告.md` 补全 OpenDSS、GridLAB-D、pandapower、PowerModelsDistribution 的官方来源、评估版本/提交、维护状态和许可证；每条关键判断均可定位
-- [ ] 3.2 lead（Reviewer: member）使用统一矩阵比较配网建模、求解、时序/控制、接口、平台依赖、输入输出、性能/连续运行、复现性、EV 场景适配、Python 编排边界和风险；不使用无法解释的综合总分
-- [ ] 3.3 lead（Reviewer: member）基于统一证据选择一个首选 PoC 后端和必要备选；只对最有价值的候选完成或引用可复核的 E2/E3 验证，其余保持 E0/E1，不把资料阅读冒充运行
-- [ ] 3.4 lead（Reviewer: member）固定首选后端版本/提交，自动生成 `docs/reference_catalogs/grid_backend/<selected-project>/`，覆盖生产源码中的全部函数、类和方法；提交 `README.md`、`symbols.csv`、`coverage.md` 和按模块目录
-- [ ] 3.5 lead（Reviewer: member）确保全量符号具有非空功能初稿和复核状态，逐项人工复核首选后端中与模型加载、网络对象、求解、时序/控制、结果和错误处理直接相关的核心模块，其余模块按模块抽检；Reviewer 重新扫描同一版本，确认无遗漏、无重复，未解析文件和排除项均已记录
-- [ ] 3.6 lead（Reviewer: member）对应 `REQ-EV-005/007/009/011/012` 形成“继续 PoC、保留候选、暂缓、淘汰”的阶段建议，列出下一 PoC、数据模型/适配器输入和未决问题；首选只表示进入 PoC，不等于最终生产内核
+- [x] 3.1 lead（Reviewer: member）在 `docs/deliverables/配电网仿真工具选型与验证报告.md` 补全 OpenDSS、GridLAB-D、pandapower、PowerModelsDistribution 的官方来源、评估版本/提交、维护状态和许可证；每条关键判断均可定位
+- [x] 3.2 lead（Reviewer: member）使用统一矩阵比较配网建模、求解、时序/控制、接口、平台依赖、输入输出、性能/连续运行、复现性、EV 场景适配、Python 编排边界和风险；不使用无法解释的综合总分
+- [x] 3.3 lead（Reviewer: member）基于统一证据选择一个首选 PoC 后端和必要备选；只对最有价值的候选完成或引用可复核的 E2/E3 验证，其余保持 E0/E1，不把资料阅读冒充运行
+- [x] 3.4 lead（Reviewer: member）固定首选后端版本/提交，自动生成 `docs/reference_catalogs/grid_backend/<selected-project>/`，覆盖生产源码中的全部函数、类和方法；提交 `README.md`、`symbols.csv`、`coverage.md` 和按模块目录
+- [x] 3.5 lead（Reviewer: member）确保全量符号具有非空功能初稿和复核状态，逐项人工复核首选后端中与模型加载、网络对象、求解、时序/控制、结果和错误处理直接相关的核心模块，其余模块按模块抽检；Reviewer 重新扫描同一版本，确认无遗漏、无重复，未解析文件和排除项均已记录
+- [x] 3.6 lead（Reviewer: member）对应 `REQ-EV-005/007/009/011/012` 形成“继续 PoC、保留候选、暂缓、淘汰”的阶段建议，列出下一 PoC、数据模型/适配器输入和未决问题；首选只表示进入 PoC，不等于最终生产内核
 
 ## 4. 交叉复核与需求收敛
 
@@ -29,6 +29,6 @@
 
 ## 5. 集成、文档归并与验收
 
-- [ ] 5.1 lead（Reviewer: member）运行 `openspec validate assess-grid-simulation-backends`、`git diff --check` 及报告链接检查，并把命令与结果写入 PR；所有检查通过或有明确的受限说明
+- [x] 5.1 lead（Reviewer: member）运行 `openspec validate assess-grid-simulation-backends`、`git diff --check` 及报告链接检查，并把命令与结果写入 PR；所有检查通过或有明确的受限说明
 - [ ] 5.2 lead（Reviewer: member）将本轮可执行结论拆成下一阶段 PoC、接口或数据模型 OpenSpec change/Issue；逐项确认来源可回链到两份调研成果
 - [ ] 5.3 lead（Reviewer: member）按“证据充分、结论不过度、后续问题可追踪”完成验收；未达到高证据等级的项目允许作为阶段稿合入，但必须转为下一成果窗口的 Issue

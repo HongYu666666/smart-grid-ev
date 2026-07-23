@@ -1,0 +1,11 @@
+# `pandapower.pypower.pfsoln`
+
+本模块共记录 5 个函数、类或方法。
+
+| kind | qualified_name | signature | source_anchor | summary | inputs_outputs | side_effects | dependencies | development_relevance | evidence_status | review_status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| function | pandapower.pypower.pfsoln._split_p_for_gens_at_same_bus | (gen, p_bus, gens_at_bus, ref_gens) | pandapower/pypower/pfsoln.py#L76 | 待人工补充：源码未提供可直接确认的功能说明；需结合 pandapower.pypower.pfsoln._split_p_for_gens_at_same_bus 的实现与调用链确认。 | 输入：gen, p_bus, gens_at_bus, ref_gens；输出：返回值未注解 | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | len；intersect1d；setdiff1d；sum | 可参考：是否进入适配器边界由后续 PoC 决定 | 源码确认（静态 AST） | 自动生成 |
+| function | pandapower.pypower.pfsoln._update_p | (baseMVA, bus, gen, ref, gbus, Sbus, ref_gens) | pandapower/pypower/pfsoln.py#L94 | 待人工补充：源码未提供可直接确认的功能说明；需结合 pandapower.pypower.pfsoln._update_p 的实现与调用链确认。 | 输入：baseMVA, bus, gen, ref, gbus, Sbus, ref_gens；输出：返回值未注解 | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | find；_split_p_for_gens_at_same_bus；len | 可参考：是否进入适配器边界由后续 PoC 决定 | 源码确认（静态 AST） | 自动生成 |
+| function | pandapower.pypower.pfsoln._update_q | (baseMVA, bus, gen, gbus, Sbus, on) | pandapower/pypower/pfsoln.py#L108 | 待人工补充：源码未提供可直接确认的功能说明；需结合 pandapower.pypower.pfsoln._update_q 的实现与调用链确认。 | 输入：baseMVA, bus, gen, gbus, Sbus, on；输出：返回值未注解 | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | zeros；len；csr_matrix；flatten；find；Cmin.sum；Cmax.sum；ones；Cg.sum；asarray；range | 可参考：是否进入适配器边界由后续 PoC 决定 | 源码确认（静态 AST） | 自动生成 |
+| function | pandapower.pypower.pfsoln._update_v | (bus, V) | pandapower/pypower/pfsoln.py#L70 | 待人工补充：源码未提供可直接确认的功能说明；需结合 pandapower.pypower.pfsoln._update_v 的实现与调用链确认。 | 输入：bus, V；输出：返回值未注解 | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | abs；angle | 可参考：是否进入适配器边界由后续 PoC 决定 | 源码确认（静态 AST） | 自动生成 |
+| function | pandapower.pypower.pfsoln.pfsoln | (baseMVA, bus0, gen0, branch0, svc, tcsc, ssc, vsc, Ybus, Yf, Yt, V, ref, ref_gens, Ibus=None, limited_gens=None) | pandapower/pypower/pfsoln.py#L25 | Updates bus, gen, branch data structures to match power flow soln. | 输入：baseMVA, bus0, gen0, branch0, svc, tcsc, ssc, vsc, Ybus, Yf, Yt, V, ref, ref_gens, Ibus, limited_gens；输出：返回值未注解 | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | find；astype；_update_v；_update_q；_update_p；len；zeros；conj；ix_；isin；arange；real | 可参考：是否进入适配器边界由后续 PoC 决定 | 源码确认（静态 AST） | 自动生成 |
