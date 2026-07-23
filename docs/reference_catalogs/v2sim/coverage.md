@@ -1,45 +1,49 @@
 # V2Sim 代码目录覆盖率
 
-## 扫描结果
+## 扫描结果（精确统计）
 
 | 指标 | 值 |
 |------|---|
-| 总 .py 文件 | 95 |
-| 成功解析 | 95 |
-| 解析失败 | 0 |
-| 总符号 | 1834 |
-| 类 | 181 |
-| 函数/方法 | 1653 |
-
-## 模块分布
-
-| 模块 | 文件数 | 符号数 | 复核状态 |
-|------|--------|--------|---------|
-| core.py | 1 | 53 | 人工复核 |
-| sim/ (交通仿真) | ~10 | ~250 | 人工复核 |
-| hub/ (充电站) | ~8 | ~230 | 人工复核 |
-| veh/ (车辆) | ~5 | ~150 | 人工复核 |
-| net.py (路网) | 1 | 73 | 人工复核 |
-| plugins/ (插件/配网) | ~5 | ~80 | 人工复核 |
-| gen/ (生成) | ~5 | ~70 | 抽检 |
-| plot/ (绘图) | ~8 | ~100 | 抽检 |
-| gui/ (界面) | ~30 | ~500 | 抽检 |
-| stats/ (统计) | ~5 | ~50 | 抽检 |
-| app/ (命令行入口) | ~10 | ~50 | 抽检 |
-| 其他 (utils, seg, wrapper) | ~7 | ~80 | 抽检 |
+| 扫描 .py 文件数 | 114 |
+| 解析失败文件数 | 0 |
+| 原始符号数（含重复） | 1770 |
+| 去重后唯一符号数 | 1755 |
+| 重复 qualified_name 数 | 13 |
+| class | 181 |
+| function | 158 |
+| method | 1416 |
+| 功能说明已填充 | 641 |
+| 功能说明待人工补充 | 1114 |
 
 ## 排除项
 
 | 排除类型 | 说明 |
 |---------|------|
-| `__pycache__/` | Python 编译缓存目录 |
-| `.pyc` 文件 | 字节码文件 |
-| 测试文件 | v2sim PyPI 包中不含测试目录 |
-| vendored 代码 | `sim/uxsim/` 下为集成的 UXsim 代码，按原项目许可保留 |
-| 生成代码 | 无自动生成代码 |
+| `__pycache__/` | Python 编译缓存 |
+| 非 .py 文件 | 数据文件、配置文件等 |
+| 嵌套定义（二级以下） | 仅扫描顶层和类一级方法 |
+
+## 去重说明
+
+使用 `qualified_name`（模块路径.类名.方法名）作为唯一标识。
+原始扫描发现 13 个重复项，已去重保留首次出现。
+
+### 重复项示例（前10个）
+
+- `gen.csquery._Rect.__init__` (出现 3 次)
+- `gen.misc.create_veh` (出现 3 次)
+- `gui.mainbox.controls.network.NetworkPanel.Enabled` (出现 2 次)
+- `gui.mainbox.controls.network.NetworkPanel.saved` (出现 2 次)
+- `gui.mainbox.controls.scrtv.ScrollableTreeView.AfterFunc` (出现 2 次)
+- `veh.ev.EV.kf` (出现 2 次)
+- `veh.ev.EV.ks` (出现 2 次)
+- `veh.ev.EV.kv2g` (出现 2 次)
+- `veh.veh.Vehicle.kf` (出现 2 次)
+- `veh.veh.Vehicle.kr` (出现 2 次)
 
 ## 复核方法
 
-- **核心模块**（core, sim, hub, veh, net, plugins）：逐个符号确认功能说明非空
-- **辅助模块**（gen, plot, gui, stats, app）：每模块抽检 ≥5 个符号
-- 功能说明基于源码 docstring 和上下文推断，标注 `[auto]` 为工具生成、`[reviewed]` 为人工确认
+- `evidence_status`: `auto_generated` = 工具自动生成
+- `review_status`: `pending` = 待复核, `reviewed` = 已人工复核
+- 核心模块（core, sim, hub, veh, net, plugins）需逐项人工复核
+- 辅助模块按模块抽检 ≥5 符号
