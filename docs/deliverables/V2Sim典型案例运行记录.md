@@ -207,16 +207,59 @@ ux_12nodes/results/
 
 ### 7.3 结果检查
 
-**可确认的事实**：
-- 仿真 17280 步正常完成，无异常退出
-- pdn 插件被加载并执行（pdn_res.log 有输出）
-- 充电过程有事件记录（cproc.clog 1405 字节非空）
-- 配电网计算触发了负荷削减（"Enable load reduction"日志）
+**可确认的事实（含文本证据）**：
 
-**无法确认的结论**（降级处理）：
-- 快充站峰值负荷数值：命令行模式未输出完整时序，标为 E1
-- 各站负荷分布：同上，需 GUI 模式或进一步 API 研究
-- 电气数值合理性：未进行交叉校核
+1. 仿真 17280 步正常完成，exit code 0，墙钟 9.2 秒
+2. pdn 插件加载并执行：
+   ```
+   # pdn_res.log 完整内容 (96 bytes):
+   Enable load reduction at bus b1
+   Enable load reduction at bus b0
+   Enable load reduction at bus b2
+   ```
+3. 充电过程有事件记录：
+   ```
+   cproc.clog: 1405 bytes, sha256=82ac9836c8e792495041ea98e2f2fced1a8b06ef125e0c1c461ff248f679a538
+   ```
+4. fcs.csv 结构（命令行模式仅输出列定义，无数据行）：
+   ```
+   # fcs.csv 完整内容 (288 bytes):
+   C
+   fcs_CS1#cnt,fcs_CS10#cnt,...,fcs_CS9#cnt,fcs_CS1#c,...,fcs_CS9#c
+   Time,Item,Value
+   ```
+
+**检查命令**（可复跑）：
+```bash
+# 验证仿真完成
+python -c "
+from v2sim import simulate_single, TimeConfig
+simulate_single('v2sim-1.4.4/cases/ux_12nodes', TimeConfig(0, 10, 172800), silent=False, seed=42)
+"
+# 预期最后一行: Total steps: 17280
+
+# 验证输出文件存在
+python -c "
+import os
+results = 'v2sim-1.4.4/cases/ux_12nodes/results'
+for f in sorted(os.listdir(results)):
+    size = os.path.getsize(os.path.join(results, f)) if os.path.isfile(os.path.join(results, f)) else 'dir'
+    print(f'{f}: {size}')
+"
+
+# 验证 cproc.clog 哈希
+python -c "
+import hashlib
+with open('v2sim-1.4.4/cases/ux_12nodes/results/cproc.clog','rb') as f:
+    print(hashlib.sha256(f.read()).hexdigest())
+"
+# 预期: 82ac9836c8e792495041ea98e2f2fced1a8b06ef125e0c1c461ff248f679a538
+```
+
+**降级的结论（原版报告中已移除）**：
+- ~~"峰值约 580kW"~~ → 降级为 E1：此数据来自 GUI 模式的早期非隔离运行，当前隔离环境命令行模式未输出时序数据，无法交叉验证
+- ~~"第二天显著更低"~~ → 同上，降级为 E1
+- ~~"FPowerKit 为 LinDistFlow"~~ → 来源锚点：`fpowerkit/solcmb.py:9` 定义 `LinDistFlow = 'LinDistFlow'` 枚举值。V2Sim pdn 插件使用 FPowerKit 的 `Estimator` 枚举进行潮流估计。证据等级 E1（源码可见但未验证具体调用路径）
 
 ---
 
@@ -250,11 +293,13 @@ ux_12nodes/results/
 
 ### 9.2 配电网计算内核（FPowerKit）
 
-| 属性 | 值 |
-|------|---|
-| 求解方式 | 基于 LinDistFlow 线性化潮流 |
-| 精度 | 线性近似（非全非线性潮流） |
-| 与候选后端关系 | 为 V2Sim 内置方案，需与 pandapower/OpenDSS 等对比后决定 |
+| 属性 | 值 | 证据 |
+|------|---|------|
+| 包版本 | 0.4.3 | `pip show fpowerkit` |
+| 求解方式 | DistFlow / LinDistFlow / LinDistFlow2 (枚举) | 源码锚点: `fpowerkit/solcmb.py:8-10` |
+| 默认估计器 | `Estimator.DistFlow` | 源码锚点: `fpowerkit/solcmb.py:24` |
+| 精度 | 线性近似（非全非线性潮流） | E1: 基于源码枚举推断，未通过案例输出交叉验证 |
+| 与候选后端关系 | V2Sim 内置方案，需与 pandapower/OpenDSS 等对比后决定 | — |
 
 ### 9.3 不可直接复用（需 Python 编排层）
 
