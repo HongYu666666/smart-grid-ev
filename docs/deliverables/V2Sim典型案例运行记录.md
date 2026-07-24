@@ -1,167 +1,402 @@
 # V2Sim 典型案例运行记录
 
-## 文档信息
+> **OpenSpec change**: `assess-grid-simulation-backends`  
+> **对应 tasks**: 2.1—2.6  
+> **负责人**: HongYu666666 (member)  
+> **Reviewer**: lead（2026-07-24 接管修复并独立复核）  
+> **日期**: 2026-07-23（运行）/ 2026-07-24（验收）
 
-| 项目 | 内容 |
-| --- | --- |
-| OpenSpec change | `assess-grid-simulation-backends` |
-| GitHub Issue | `#8` |
-| 对应任务 | `2.1`—`2.6` |
-| 代表性案例 | `v2sim/cases/ux_12nodes/` |
-| 负责人 | `member` |
-| Reviewer | `lead` |
-| 当前状态 | 环境探测完成，案例尚未运行 |
-| 当前证据等级 | `E1`；E2 导入受依赖阻塞 |
-| 更新日期 | 2026-07-23 |
+---
 
-本记录只证明 V2Sim 参考项目在指定环境中的资料、导入或运行状态，不构成新系统实现证据，也不把 V2Sim 指定为新系统代码基线或唯一主仿真内核。
+## 1. 版本与提交（固定）
 
-本成果还必须在 `docs/reference_catalogs/v2sim/` 建立固定版本 V2Sim 的完整函数、类和方法目录，供后续新系统设计和适配时检索。全量目录由工具生成，核心开发链路逐项人工复核，其余模块按模块抽检；本报告不重复粘贴逐符号内容。
+| 项目 | 值 |
+|------|---|
+| V2Sim 版本 | 1.4.4 |
+| GitHub 仓库 | https://github.com/hesl-seu/v2sim |
+| 固定 tag | `v1.4.4` |
+| 固定 commit | `5cf6777ac6780f2247802533941204e4a95bc2ce` |
+| PyPI wheel SHA256 | `8f6dd9b4822af0545806d29d0c8371cccad2594a36e5aa91e2dc9cec4ab2198e` |
+| wheel 文件名 | `v2sim-1.4.4-py3-none-any.whl` |
+| 案例来源 | 同一 tag `v1.4.4` 的 `cases/ux_12nodes/` 目录 |
+| 案例获取方式 | `https://github.com/hesl-seu/v2sim/archive/refs/tags/v1.4.4.zip` |
+| FPowerKit 版本 | 0.4.3 |
+| libsumo 版本 | 1.27.1 |
 
-## 1. 案例选择
+> **说明**：PyPI 1.4.4 wheel 与 GitHub tag `v1.4.4` (commit `5cf6777`) 为同一发布，SHA256 一致。案例文件从同一 tag 的 zip 包获取，确保源码与案例版本统一。
 
-选择 `v2sim/cases/ux_12nodes/`，原因如下：
+---
 
-- 仓库已包含完整案例配置文件；
-- 使用仓库内置的 UXsim 路线，避免把 SUMO 外部程序作为第一步前置条件；
-- 案例声明同时包含交通、车辆、快/慢充、配网与统计配置，适合梳理输入输出边界；
-- 规模较小，适合作为 E3 最小案例，不代表新系统固定规模。
+## 2. 运行环境（隔离环境）
 
-## 2. 仓库输入
+| 项目 | 值 |
+|------|---|
+| OS | Windows 10 x64 (build 19045) |
+| Python | 3.12.13 (conda env `v2sim_test`) |
+| pip | 26.1.2 |
+| 隔离方法 | `conda create -n v2sim_test python=3.12 -y` 独立虚拟环境 |
+| 安装命令 | `pip install v2sim==1.4.4` |
+| SUMO | 未独立安装（使用 pip 依赖的 libsumo + sumo-data） |
 
-### 2.1 快照信息
+### 关键依赖版本（pip freeze 摘要）
 
-| 字段 | 当前值 |
-| --- | --- |
-| 项目仓库提交 | `a92432a` |
-| V2Sim 源码路径 | `v2sim/` |
-| 源码声明版本 | `1.5.0b2`，来自 `v2sim/pyproject.toml` 与 `v2sim/v2sim/__init__.py` |
-| Python 要求 | `>=3.9` |
-| 许可证声明 | BSD-3-Clause，待与正式评估版本官方 LICENSE 复核 |
+```
+v2sim==1.4.4
+fpowerkit==0.4.3
+libsumo==1.27.1
+sumolib==1.27.1
+traci==1.27.1
+sumo-data==1.27.1
+pyproj==3.7.2
+feasytools==0.1.6
+numpy==2.5.1
+scipy==1.18.0
+matplotlib==3.11.1
+networkx==3.6.1
+```
 
-### 2.2 案例文件
+> **注意**：pip 默认解析 fpowerkit>=0.4.1 时会安装 0.5.0，但 v2sim 1.4.4 在 fpowerkit 0.5.0 下存在运行时兼容问题。需手动固定 `pip install fpowerkit==0.4.3`。
 
-| 文件 | 作用 | 当前核查 |
+---
+
+## 3. 代表性案例选择
+
+| 属性 | 值 |
+|------|---|
+| 案例名称 | ux_12nodes |
+| 交通引擎 | UXsim（中观，内置于 v2sim，无需额外安装） |
+| 配电网规模 | 12 节点 |
+| 选择原因 | 最轻量案例，不依赖外部 SUMO 安装，适合验证基本流程 |
+
+### 案例配置文件
+
+案例路径（从 tag v1.4.4 zip 解压后）：`v2sim-1.4.4/cases/ux_12nodes/`
+
+```
+ux_12nodes/
+├── node_type.txt           # 节点类型定义
+├── preference.v2simcfg     # 仿真偏好配置
+├── ux_12nodes.fcs.xml      # 快充站配置（12 个站点）
+├── ux_12nodes.grid.xml     # 配电网拓扑
+├── ux_12nodes.gs.xml       # 加油站配置（12 个站点）
+├── ux_12nodes.net.xml      # 交通路网
+├── ux_12nodes.plg.xml      # 插件配置（pdn 配电网模型）
+└── ux_12nodes.scs.xml      # 慢充站配置（12 个站点）
+```
+
+---
+
+## 4. 安装命令
+
+```bash
+pip install v2sim==1.4.4
+pip install fpowerkit==0.4.3
+```
+
+**实际输出摘要**：
+```
+Successfully installed feasytools-0.1.6 fpowerkit-0.4.3 libsumo-1.27.1
+pyproj-3.7.2 sumo-data-1.27.1 sumolib-1.27.1 traci-1.27.1 v2sim-1.4.4
+```
+
+**验证**：
+```bash
+python -c "import v2sim; print(v2sim.__version__)"
+# 输出: 1.4.4
+```
+
+---
+
+## 5. 车辆行程生成
+
+案例不自带车辆文件，需先生成。
+
+**命令**：
+```bash
+conda activate v2sim_test
+pip install v2sim==1.4.4
+pip install fpowerkit==0.4.3  # 固定兼容版本
+v2sim-gen-trip -d "v2sim-1.4.4/cases/ux_12nodes" -n-ev 500 -n-gv 500
+```
+
+**输出**：
+```
+1000/1000, 100.00%
+已完成. 用时0.1秒.
+```
+
+**生成文件**：`ux_12nodes.veh.xml.gz`（车辆行程压缩文件）
+**退出码**：0
+
+---
+
+## 6. 仿真运行（隔离环境实际执行）
+
+**命令**：
+```python
+from v2sim import simulate_single, TimeConfig
+simulate_single("v2sim-1.4.4/cases/ux_12nodes", TimeConfig(0, 10, 172800), silent=False, seed=42)
+```
+
+**等效命令行**：
+```bash
+v2sim-gen-trip -d "v2sim-1.4.4/cases/ux_12nodes" -n-ev 500 -n-gv 500
+# 然后通过 Python API 调用 simulate_single
+```
+
+**实际终端输出**：
+```
+仿真开始，按Ctrl-C中断
+  交通仿真器：UXsim
+  路网: .../ux_12nodes/ux_12nodes.net.xml
+  行程: .../ux_12nodes/ux_12nodes.veh.xml.gz, 1000辆车
+  快充: .../ux_12nodes/ux_12nodes.fcs.xml, 12个站点
+  慢充: .../ux_12nodes/ux_12nodes.scs.xml, 12个站点
+  加油站: .../ux_12nodes/ux_12nodes.gs.xml, 12个站点
+已创建单个串行仿真.
+  插件: pdn - 配电网模型
+进度: 100.00%, 172800/172800. 已用时: 00:00:09, 预计剩余时间: 00:00:00
+仿真结束. 用时: 00:00:09
+Total steps: 17280
+```
+
+| 运行指标 | 值 |
+|---------|---|
+| 仿真步数 | 17280 |
+| 仿真时长 | 172800 秒（2 天） |
+| 时间步长 | 10 秒 |
+| 墙钟时间 | 9.2 秒 |
+| 退出状态 | 正常完成（exit code 0） |
+| 随机种子 | 42 |
+| 环境 | conda env `v2sim_test`, Python 3.12.13 |
+
+---
+
+## 7. 输出结果
+
+### 7.1 输出目录
+
+```
+ux_12nodes/results/
+├── bus.csv        # 母线电压/功率（配电网）
+├── fcs.csv        # 快充站负荷时序
+├── scs.csv        # 慢充站负荷时序
+├── gen.csv        # 发电机数据
+├── gs.csv         # 加油站数据
+├── line.csv       # 线路潮流
+├── utn.csv        # 交通网络数据
+├── cproc.log      # 充电过程日志
+├── cproc.clog     # 充电过程压缩日志
+├── pdn_res.log    # 配电网计算日志
+├── pdn_logs/      # 配电网详细日志
+└── saved_state/   # 仿真状态保存
+```
+
+### 7.2 各输出内容
+
+| 输出文件 | 大小 | 内容说明 |
+|---------|------|---------|
+| fcs.csv | 288 B | 快充站列名定义 + Time,Item,Value 表头（命令行模式仅输出结构，无完整时序数据） |
+| scs.csv | — | 慢充站列名定义（同上） |
+| gs.csv | — | 加油站列名定义 |
+| cproc.clog | 1405 B | 充电过程压缩日志（二进制格式，含实际充电事件） |
+| cproc.log | 0 B | 充电过程文本日志（本次运行为空） |
+| pdn_res.log | — | 配电网计算日志（含 "Enable load reduction at bus b0/b1/b2"） |
+| pdn_logs/ | 目录 | 配电网详细日志 |
+
+> **本次观察**：当前 `simulate_single` 调用生成的 `fcs.csv` 只有列定义，没有完整时序数据。该事实只说明本次固定命令和配置的输出；尚不能据此断言所有命令行模式均如此，也不能把早期 GUI 结果当作本次隔离运行证据。输出配置和读取机制转入后续 PoC。
+
+### 7.3 结果检查
+
+**可确认的事实（含文本证据）**：
+
+1. 仿真 17280 步正常完成，exit code 0，墙钟 9.2 秒
+2. pdn 插件加载并执行：
+   ```
+   # pdn_res.log 完整内容 (96 bytes):
+   Enable load reduction at bus b1
+   Enable load reduction at bus b0
+   Enable load reduction at bus b2
+   ```
+3. 充电过程有事件记录：
+   ```
+   cproc.clog: 1405 bytes, sha256=82ac9836c8e792495041ea98e2f2fced1a8b06ef125e0c1c461ff248f679a538
+   ```
+4. fcs.csv 结构（命令行模式仅输出列定义，无数据行）：
+   ```
+   # fcs.csv 完整内容 (288 bytes):
+   C
+   fcs_CS1#cnt,fcs_CS10#cnt,...,fcs_CS9#cnt,fcs_CS1#c,...,fcs_CS9#c
+   Time,Item,Value
+   ```
+
+**检查命令**（可复跑）：
+```bash
+# 验证仿真完成
+python -c "
+from v2sim import simulate_single, TimeConfig
+simulate_single('v2sim-1.4.4/cases/ux_12nodes', TimeConfig(0, 10, 172800), silent=False, seed=42)
+"
+# 预期最后一行: Total steps: 17280
+
+# 验证输出文件存在
+python -c "
+import os
+results = 'v2sim-1.4.4/cases/ux_12nodes/results'
+for f in sorted(os.listdir(results)):
+    size = os.path.getsize(os.path.join(results, f)) if os.path.isfile(os.path.join(results, f)) else 'dir'
+    print(f'{f}: {size}')
+"
+
+# 验证 cproc.clog 哈希
+python -c "
+import hashlib
+with open('v2sim-1.4.4/cases/ux_12nodes/results/cproc.clog','rb') as f:
+    print(hashlib.sha256(f.read()).hexdigest())
+"
+# 预期: 82ac9836c8e792495041ea98e2f2fced1a8b06ef125e0c1c461ff248f679a538
+```
+
+**降级的结论（原版报告中已移除）**：
+- ~~"峰值约 580kW"~~ → 降级为 E1：此数据来自 GUI 模式的早期非隔离运行，当前隔离环境命令行模式未输出时序数据，无法交叉验证
+- ~~"第二天显著更低"~~ → 同上，降级为 E1
+- ~~"FPowerKit 为 LinDistFlow"~~ → 来源锚点：`fpowerkit/solcmb.py:9` 定义 `LinDistFlow = 'LinDistFlow'` 枚举值。V2Sim pdn 插件使用 FPowerKit 的 `Estimator` 枚举进行潮流估计。证据等级 E1（源码可见但未验证具体调用路径）
+
+---
+
+### 7.4 输入、控制动作与评价指标边界
+
+| 类别 | 本次案例中的对象 | 当前证据 |
 | --- | --- | --- |
-| `preference.v2simcfg` | 时间、随机种子、交通步长、统计项等统一配置 | 已读取 |
-| `ux_12nodes.net.xml` | UXsim 交通网络 | 文件存在，语义待运行核查 |
-| `ux_12nodes.plg.xml` | 插件配置 | 文件存在，插件依赖待核查 |
-| `ux_12nodes.grid.xml` | 配网配置 | 文件存在，FPowerKit 边界待核查 |
-| `ux_12nodes.fcs.xml` | 快充站配置 | 文件存在 |
-| `ux_12nodes.scs.xml` | 慢充站配置 | 文件存在 |
-| `ux_12nodes.gs.xml` | 加油站配置 | 文件存在 |
-| `node_type.txt` | 节点类型配置 | 文件存在 |
+| 输入 | 12 节点配网、交通路网、快/慢充站、1000 辆车辆行程、插件配置、`seed=42`、10 秒步长 | 固定文件与命令，E3 |
+| 交通/车辆状态 | UXsim 时间推进、车辆行程与充电过程 | 主循环完成；逐事件内容未交叉校核 |
+| 控制动作 | pdn 插件触发 b0/b1/b2 母线负荷削减 | `pdn_res.log` 文本确认，数值动作与约束未校核，E2 |
+| 充电输出 | `cproc.clog`、快/慢充统计文件 | 文件与哈希确认；事件内容和完整时序未解析，E1/E2 |
+| 配网输出 | bus/line/gen 日志与 pdn 详细日志 | 输出路径确认；电压、潮流和损耗未做基准对比，最高 E2 |
+| 评价指标 | 步数、退出状态、墙钟时间、文件存在/大小/哈希 | 可复核；不构成电气正确性或性能结论 |
 
-当前案例目录未发现车辆/行程输入文件。Reviewer 在实际运行前必须确认是由命令生成、由保存状态提供，还是仓库快照不完整；不得把“案例文件存在”写成“案例已运行”。
+代码目录入口：[`docs/reference_catalogs/v2sim/`](../reference_catalogs/v2sim/README.md)。目录固定同一提交，记录 114 个源码文件、1755 个唯一符号、48 个核心人工复核符号和 298 个模块抽检符号。
 
-### 2.3 配置摘要
+---
 
-| 配置项 | 当前值 |
-| --- | --- |
-| `start_time` | `0` |
-| `end_time` | `172800` 秒 |
-| `traffic_step` | `10` 秒 |
-| `seed` | `0` |
-| `routing_method` | `astar` |
-| `visualize` | `false` |
-| `stats` | `fcs`、`scs`、`gs`、`gen`、`bus`、`line`、`utn` |
+## 8. 证据等级评定（按 OpenSpec E0—E4 定义）
 
-以上只说明配置意图。输出是否实际产生、字段是否完整以及结果是否合理，必须由 E3 运行证据确认。
+> E0=未尝试 | E1=有代码/配置但未执行 | E2=安装/导入成功 | E3=固定输入+命令+输出+结果检查齐备的最小案例运行 | E4=输出经交叉验证或与基准对比
 
-## 3. 当前环境
+| 维度 | 等级 | 依据 |
+|------|------|------|
+| 安装 + import | **E2** | `pip install v2sim==1.4.4` 成功；`import v2sim; print(v2sim.__version__)` 输出 `1.4.4` |
+| 车辆生成 | **E3** | 固定命令 `v2sim-gen-trip -n-ev 500 -n-gv 500`；输出 `1000/1000, 100.00%`；生成 `ux_12nodes.veh.xml.gz`；exit code 0 |
+| 仿真主循环 | **E3** | 固定输入(seed=42)；`TimeConfig(0,10,172800)`；输出 17280 步、9.2 秒、exit 0；pdn 插件加载确认 |
+| 充电事件记录 | **E2** | `cproc.clog` 非空(1405B)，但未解析验证内容 |
+| 配电网插件 | **E2** | pdn_res.log 有"Enable load reduction"输出，但未校核电气数值 |
+| 时序 CSV 输出 | **E1** | fcs.csv 仅有列定义，命令行模式未产生完整数据行 |
+| V2G 功能 | **E1** | 配置中存在 V2G 参数，未单独运行放电场景 |
+| SUMO 后端 | **E0** | 未安装独立 SUMO，sumo_* 案例未运行 |
 
-| 字段 | 当前值 |
-| --- | --- |
-| 操作系统 | Linux（具体发行版待 member 补充） |
-| Python | `3.13.12` |
-| 隔离环境 | 尚未创建 |
-| 本地源码导入方式 | `PYTHONPATH=v2sim` |
-| 当前导入结果 | 失败 |
-| 首个阻塞依赖 | `feasytools` |
-| 其他已探测缺失 | `fpowerkit`、`scipy`；完整依赖仍需在隔离环境核查 |
+---
 
-### 3.1 已执行命令
+## 9. V2Sim 能力边界
 
-```text
-PYTHONPATH=v2sim python -c "import v2sim; print(v2sim.__file__); print(v2sim.__version__)"
+### 9.1 可复用能力（交通 + 充电 + EV 行为）
+
+| 能力 | V2Sim 实现方式 | 新系统潜在复用方式 |
+|------|--------------|-----------------|
+| EV 出行生成 | OD 驱动 + 随机种子 | 作为数据生成器参考 |
+| 交通流仿真 | UXsim(中观) / SUMO(微观) | 交通孪生体候选后端 |
+| 充电排队与功率仿真 | 事件驱动 + CC-CV 模型 | 充电站孪生体参考 |
+| V2G 放电 | 可配置 V2G 策略 | 待验证后评估 |
+
+### 9.2 配电网计算内核（FPowerKit）
+
+| 属性 | 值 | 证据 |
+|------|---|------|
+| 包版本 | 0.4.3 | `pip show fpowerkit` |
+| 求解方式 | DistFlow / LinDistFlow / LinDistFlow2 (枚举) | 源码锚点: `fpowerkit/solcmb.py:8-10` |
+| 默认估计器 | `Estimator.DistFlow` | 源码锚点: `fpowerkit/solcmb.py:24` |
+| 算法与精度 | 本次未确认实际求解路径和误差 | 枚举存在只记 E1；未通过案例输出或基准馈线交叉验证 |
+| 与候选后端关系 | V2Sim 内置方案，需与 pandapower/OpenDSS 等对比后决定 | — |
+
+### 9.3 不可直接复用（需 Python 编排层）
+
+- 自定义智能体决策逻辑
+- T 型架构孪生体编排
+- LLM 顾问接入
+- 拓扑画布可视化
+- 多场景对比分析
+
+---
+
+## 10. 与新系统验收边界
+
+| 声明 | 说明 |
+|------|------|
+| V2Sim 为外部参考项目 | 其运行结果不计入新系统完成度 |
+| 配电网内核未决定 | FPowerKit 仅为候选之一，需对比后选型 |
+| 交通路线未决定 | UXsim/SUMO 仅为候选，需评估后确定 |
+| 本记录不预设技术路线 | 仅记录复现事实，不做推荐 |
+
+---
+
+## 11. 复现步骤（供 Reviewer 在干净环境复核）
+
+```bash
+# 1. 创建干净隔离环境
+conda create -n v2sim_test python=3.12 -y
+conda activate v2sim_test
+
+# 2. 安装固定版本（注意 fpowerkit 兼容性）
+pip install v2sim==1.4.4
+pip install fpowerkit==0.4.3
+# 验证: python -c "import v2sim; print(v2sim.__version__)"  →  1.4.4
+
+# 3. 下载固定 tag 案例
+# https://github.com/hesl-seu/v2sim/archive/refs/tags/v1.4.4.zip
+# 解压后案例位于 v2sim-1.4.4/cases/ux_12nodes/
+
+# 4. 生成车辆
+v2sim-gen-trip -d "v2sim-1.4.4/cases/ux_12nodes" -n-ev 500 -n-gv 500
+# 预期: 1000/1000, 100.00% | exit code 0
+
+# 5. 运行仿真（Python API）
+python -c "
+from v2sim import simulate_single, TimeConfig
+simulate_single('v2sim-1.4.4/cases/ux_12nodes', TimeConfig(0, 10, 172800), silent=False, seed=42)
+"
+# 预期: Total steps: 17280 | 用时 ~9 秒 | exit code 0
+
+# 6. 检查输出
+ls v2sim-1.4.4/cases/ux_12nodes/results/
+# 预期: fcs.csv, scs.csv, gs.csv, cproc.clog, cproc.log, pdn_res.log, pdn_logs/
+# 注意: 命令行模式 fcs.csv 仅含列定义，无完整时序数据行
+
+# 7. 代码目录重扫验证（SOURCE_ROOT 指向固定 tag 克隆）
+python tools/reference_catalog/generate_python_catalog.py \
+  --source-root "$SOURCE_ROOT" --package v2sim \
+  --output /tmp/v2sim-rescan --project V2Sim \
+  --version v1.4.4 \
+  --commit 5cf6777ac6780f2247802533941204e4a95bc2ce \
+  --exclude-dir __pycache__ \
+  --manual-review-file docs/reference_catalogs/v2sim/manual_review_symbols.txt \
+  --manual-summary-file docs/reference_catalogs/v2sim/manual_review_summaries.tsv \
+  --sampled-module-file docs/reference_catalogs/v2sim/sampled_modules.txt
+diff docs/reference_catalogs/v2sim/symbols.csv /tmp/v2sim-rescan/symbols.csv
+# 预期: 114 files / 1755 symbols / 0 duplicates / 0 empty summaries / 0 parse errors
 ```
 
-### 3.2 实际结果
+> **已知问题**：`pip install v2sim==1.4.4` 默认解析 `fpowerkit>=0.4.1` 为最新版 0.5.0，会导致 UXsim 路由时 `IndexError`。必须手动 `pip install fpowerkit==0.4.3` 降级。
 
-```text
-ModuleNotFoundError: No module named 'feasytools'
-```
+## 12. Reviewer 验收记录
 
-结论：当前证据达到 `E1`，尚未达到 `E2`。该结果只说明当前 Python 环境依赖不完整，不说明 V2Sim 不可安装或不支持该案例。
+lead 于 2026-07-24 按固定 tag 重新克隆 `5cf6777ac6780f2247802533941204e4a95bc2ce` 并运行统一目录生成器，确认：
 
-## 4. 隔离环境准备步骤
+- 114 个 Python 源码文件全部解析；
+- 1755 个限定名唯一，0 个重复、0 个空字段、0 个解析失败；
+- 13 个多处定义合并并保留全部源码锚点；
+- 48 个案例加载、时间推进、交通、车辆、充电、配网插件和结果入口具有人工作业摘要；
+- 9 个支撑模块、298 个符号完成字段抽检；
+- 运行报告中的 E3 只用于固定 V2Sim 案例，不提高新系统完成度。
 
-以下为待执行方案，执行前后必须记录实际版本和输出：
+原 PR #11 的旧版阻塞项未直接豁免；本分支保留组员提交作者信息，并由 lead 修复目录合同、复核状态和证据边界后再验收。
 
-1. 在临时目录创建独立 Python 环境，不修改新系统正式依赖；
-2. 优先选择与 V2Sim 依赖兼容的 Python 版本；若 Python 3.13 安装失败，应记录失败并改用项目支持范围内的稳定版本；
-3. 从仓库快照安装 V2Sim 及所需依赖；
-4. 执行版本和导入检查；
-5. 核查或生成 `ux_12nodes` 所需车辆/行程输入；
-6. 使用命令行运行案例，将结果输出到独立临时目录；
-7. 检查声明的 `fcs/scs/gs/gen/bus/line/utn` 输出及时间范围；
-8. 保存命令、关键输出、运行时间、错误摘要和环境清单。
-
-拟执行的最小命令形式：
-
-```text
-python -m v2sim.app.sim_single \
-  -d <仓库绝对路径>/v2sim/cases/ux_12nodes \
-  -o <临时输出目录> \
-  -b 0 -e 172800 -l 10 \
-  --seed 0
-```
-
-命令依据来自 `v2sim/v2sim/app/sim_single.py` 与 `v2sim/v2sim/wrapper.py`。实际运行前必须通过版本帮助或源码再次确认参数，不得把拟执行命令记录成已执行命令。
-
-## 5. E3 运行证据模板
-
-| 字段 | 待填写 |
-| --- | --- |
-| environment |  |
-| python_version |  |
-| v2sim_version |  |
-| dependency_versions |  |
-| input_case | `v2sim/cases/ux_12nodes/` |
-| vehicle_trip_input |  |
-| command |  |
-| output_directory |  |
-| started_at |  |
-| finished_at |  |
-| duration |  |
-| exit_status |  |
-| key_output |  |
-| result_check |  |
-| evidence_level |  |
-| limitations |  |
-
-## 6. 输入输出与能力边界
-
-| 能力 | V2Sim 可提供的参考 | 新系统仍需负责 |
-| --- | --- | --- |
-| 交通 | UXsim/SUMO 路线、路网、车辆移动和路径相关能力，待 E3 核实 | 统一场景时钟、数据合同、跨域对象映射和验收 |
-| EV | 车辆、行程、SOC 和行为模型线索，待 E3 核实 | 新系统对象模型、状态校验、事件合同和证据 |
-| 充电/V2G | 快慢充站、充电过程、负荷和 V2G 插件线索，待 E3 核实 | 动作提案、安全校验、执行/拒绝/回退和业务指标 |
-| 配电网 | FPowerKit 插件与 bus/line 统计线索，待 E3 核实 | 主仿真内核选型、统一适配器、精度与工程校核 |
-| 编排 | V2Sim 自身案例运行和插件机制 | 新系统 Python 编排层、孪智交互、版本和实验管理 |
-| 结果 | 案例统计与输出格式线索 | 新系统指标口径、原始证据、需求追踪、回放和归档 |
-
-V2Sim 案例运行成功只能提高 V2Sim 参考项目的证据等级，不得把 `REQ-EV-*` 的新系统状态改为“部分具备”或“已验证”。
-
-## 7. Reviewer 核查清单
-
-- [ ] 环境、Python、V2Sim 与关键依赖版本完整；
-- [ ] 输入案例与车辆/行程来源可定位；
-- [ ] 完整命令可复制，输出写入独立目录；
-- [ ] 运行时间、退出状态和关键输出已记录；
-- [ ] 输出文件存在且内容、时间范围和单位经过检查；
-- [ ] 失败没有被写成项目能力不足；
-- [ ] V2Sim、配网主内核和新系统 Python 编排层边界清晰；
-- [ ] 参考证据没有计入新系统完成度。
-- [ ] `docs/reference_catalogs/v2sim/` 覆盖全量生产源码符号，功能说明非空且复核状态明确；
-- [ ] 场景加载、时间推进、车辆/交通、充电、配网插件、控制和结果输出核心模块已逐项人工复核。
+未达到 E4 的充电事件解析、站级时序、V2G/削减动作和电气交叉校核已转 [Issue #14](https://github.com/TsLouis/smart-grid-ev/issues/14)。

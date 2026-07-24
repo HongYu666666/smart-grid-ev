@@ -1,0 +1,16 @@
+# `v2sim.gen.poly`
+
+本模块共记录 10 个函数、类或方法。
+
+| kind | qualified_name | signature | source_anchor | summary | inputs_outputs | side_effects | dependencies | development_relevance | evidence_status | review_status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| class | v2sim.gen.poly.Polygon | class | v2sim/gen/poly.py#L6 | 待人工补充：源码未提供可直接确认的功能说明；需结合 v2sim.gen.poly.Polygon 的实现与调用链确认。 | 输入：构造参数由 __init__ 或工厂函数定义；输出：类实例 | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | elem.attrib.get；shape.split；self.type.lower；iter；p.split；self.points.append；sum；len；float；random.randint | 可参考：是否进入适配器边界由后续 PoC 决定 | 源码确认（静态 AST） | 自动生成 |
+| method | v2sim.gen.poly.Polygon.__init__ | (self, elem: Element) | v2sim/gen/poly.py#L7 | 待人工补充：源码未提供可直接确认的功能说明；需结合 v2sim.gen.poly.Polygon.__init__ 的实现与调用链确认。 | 输入：elem；输出：返回值未注解 | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | elem.attrib.get；shape.split；p.split；self.points.append；float | 可参考：是否进入适配器边界由后续 PoC 决定 | 源码确认（静态 AST） | 自动生成 |
+| method | v2sim.gen.poly.Polygon.__iter__ | (self) | v2sim/gen/poly.py#L47 | 待人工补充：源码未提供可直接确认的功能说明；需结合 v2sim.gen.poly.Polygon.__iter__ 的实现与调用链确认。 | 输入：无显式输入；输出：返回值未注解 | 静态扫描未确认外部副作用；运行态副作用仍需在 PoC 中复核 | iter | 可参考：是否进入适配器边界由后续 PoC 决定 | 源码确认（静态 AST） | 自动生成 |
+| method | v2sim.gen.poly.Polygon.center | (self) | v2sim/gen/poly.py#L42 | 待人工补充：源码未提供可直接确认的功能说明；需结合 v2sim.gen.poly.Polygon.center 的实现与调用链确认。 | 输入：无显式输入；输出：返回值未注解 | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | sum；len | 可参考：是否进入适配器边界由后续 PoC 决定 | 源码确认（静态 AST） | 自动生成 |
+| method | v2sim.gen.poly.Polygon.getConvertedType | (self) -> Optional[str] | v2sim/gen/poly.py#L16 | Convert the functional area type of the POLY mode to the functional area type of the TAZ mode | 输入：无显式输入；输出：Optional[str] | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | self.type.lower；random.randint | 可参考：是否进入适配器边界由后续 PoC 决定 | 源码确认（静态 AST） | 自动生成 |
+| class | v2sim.gen.poly.PolygonMan | class | v2sim/gen/poly.py#L50 | 待人工补充：源码未提供可直接确认的功能说明；需结合 v2sim.gen.poly.PolygonMan 的实现与调用链确认。 | 输入：构造参数由 __init__ 或工厂函数定义；输出：类实例 | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | getroot；iter；len；RuntimeError；self.polygons.append；ReadXML；Polygon | 可参考：是否进入适配器边界由后续 PoC 决定 | 源码确认（静态 AST） | 自动生成 |
+| method | v2sim.gen.poly.PolygonMan.__getitem__ | (self, idx) | v2sim/gen/poly.py#L63 | 待人工补充：源码未提供可直接确认的功能说明；需结合 v2sim.gen.poly.PolygonMan.__getitem__ 的实现与调用链确认。 | 输入：idx；输出：返回值未注解 | 静态扫描未确认外部副作用；运行态副作用仍需在 PoC 中复核 | 静态扫描未发现直接函数调用 | 可参考：是否进入适配器边界由后续 PoC 决定 | 源码确认（静态 AST） | 自动生成 |
+| method | v2sim.gen.poly.PolygonMan.__init__ | (self, file: str) | v2sim/gen/poly.py#L51 | 待人工补充：源码未提供可直接确认的功能说明；需结合 v2sim.gen.poly.PolygonMan.__init__ 的实现与调用链确认。 | 输入：file；输出：返回值未注解 | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | getroot；RuntimeError；self.polygons.append；ReadXML；Polygon | 可参考：是否进入适配器边界由后续 PoC 决定 | 源码确认（静态 AST） | 自动生成 |
+| method | v2sim.gen.poly.PolygonMan.__iter__ | (self) | v2sim/gen/poly.py#L60 | 待人工补充：源码未提供可直接确认的功能说明；需结合 v2sim.gen.poly.PolygonMan.__iter__ 的实现与调用链确认。 | 输入：无显式输入；输出：返回值未注解 | 静态扫描未确认外部副作用；运行态副作用仍需在 PoC 中复核 | iter | 可参考：是否进入适配器边界由后续 PoC 决定 | 源码确认（静态 AST） | 自动生成 |
+| method | v2sim.gen.poly.PolygonMan.__len__ | (self) | v2sim/gen/poly.py#L66 | 待人工补充：源码未提供可直接确认的功能说明；需结合 v2sim.gen.poly.PolygonMan.__len__ 的实现与调用链确认。 | 输入：无显式输入；输出：返回值未注解 | 静态扫描未确认外部副作用；运行态副作用仍需在 PoC 中复核 | len | 可参考：是否进入适配器边界由后续 PoC 决定 | 源码确认（静态 AST） | 自动生成 |

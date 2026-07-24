@@ -1,0 +1,56 @@
+# 仿真装配与生命周期
+v2sim.core.V2SimInstance
+v2sim.core.V2SimInstance.from_case_data
+v2sim.core.V2SimInstance.start
+v2sim.core.V2SimInstance.step
+v2sim.core.V2SimInstance.step_until
+v2sim.core.V2SimInstance.stop
+v2sim.core.V2SimInstance.simulate
+v2sim.core.V2SimInstance.save
+v2sim.wrapper.simulate_single
+
+# 案例、时间与交通推进
+v2sim.sim.utils.CaseData
+v2sim.sim.utils.CaseData.parse
+v2sim.sim.utils.TimeConfig
+v2sim.sim.base.TrafficInst
+v2sim.sim.base.TrafficInst.simulation_start
+v2sim.sim.base.TrafficInst.simulation_step
+v2sim.sim.base.TrafficInst.post_simulation_step
+v2sim.sim.base.TrafficInst.simulation_stop
+v2sim.sim.base.TrafficInst.find_best_station
+
+# 车辆、充电与 V2G
+v2sim.veh.ev.EV
+v2sim.veh.ev.EV.start_charging
+v2sim.veh.ev.EV.charge
+v2sim.veh.ev.EV.end_charging
+v2sim.veh.ev.EV.start_bidirectional
+v2sim.veh.ev.EV.bidirectional_charge
+v2sim.veh.ev.EV.bidirectional_discharge
+v2sim.veh.ev.EV.end_bidirectional
+v2sim.hub.cs.CS
+v2sim.hub.cs.CS.add_veh
+v2sim.hub.cs.CS.pop_veh
+v2sim.hub.cs.CS.update
+v2sim.hub.cs.CS.get_V2G_cap
+v2sim.hub.hub.CSHub
+v2sim.hub.hub.CSHub.update
+
+# 插件、配网与结果
+v2sim.plugins.base.PluginBase
+v2sim.plugins.base.PluginBase.Init
+v2sim.plugins.pool.PluginMan
+v2sim.plugins.pool.PluginMan.PreSimulationAll
+v2sim.plugins.pool.PluginMan.PreStepAll
+v2sim.plugins.pool.PluginMan.PostStepAll
+v2sim.plugins.pool.PluginMan.PostSimulationAll
+v2sim.plugins.pdn.PluginPDN
+v2sim.plugins.pdn.PluginPDN.Init
+v2sim.plugins.pdn.PluginPDN.PreStep
+v2sim.plugins.pdn.PluginPDN.PostSimulation
+v2sim.stats.manager.StaWriter
+v2sim.stats.manager.StaWriter.Add
+v2sim.stats.manager.StaWriter.Log
+v2sim.stats.manager.StaWriter.close
+v2sim.stats.manager.StaReader

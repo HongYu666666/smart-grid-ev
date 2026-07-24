@@ -1,0 +1,10 @@
+# `v2sim.gui.parabox.lgb`
+
+本模块共记录 4 个函数、类或方法。
+
+| kind | qualified_name | signature | source_anchor | summary | inputs_outputs | side_effects | dependencies | development_relevance | evidence_status | review_status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| class | v2sim.gui.parabox.lgb.LoadGroupBox | class(Toplevel) | v2sim/gui/parabox/lgb.py#L9 | 待人工补充：源码未提供可直接确认的功能说明；需结合 v2sim.gui.parabox.lgb.LoadGroupBox 的实现与调用链确认。 | 输入：构造参数由 __init__ 或工厂函数定义；输出：类实例 | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | __init__；self.title；self.geometry；Label；self.lb.pack；Frame；self.fr.pack；self.lb_p.grid；self.fr2.grid；self.lb_pv.pack；Button；self.en_p.pack；self.lb_m.grid；Combobox；self.cb.grid；self.cb.current | 可参考：是否进入适配器边界由后续 PoC 决定 | 源码确认（静态 AST） | 自动生成 |
+| method | v2sim.gui.parabox.lgb.LoadGroupBox.__init__ | (self, parent, folder: str) | v2sim/gui/parabox/lgb.py#L10 | 待人工补充：源码未提供可直接确认的功能说明；需结合 v2sim.gui.parabox.lgb.LoadGroupBox.__init__ 的实现与调用链确认。 | 输入：parent, folder；输出：返回值未注解 | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | __init__；self.title；self.geometry；Label；self.lb.pack；Frame；self.fr.pack；self.lb_p.grid；self.fr2.grid；self.lb_pv.pack；Button；self.en_p.pack；self.lb_m.grid；Combobox；self.cb.grid；self.cb.current | 可参考：是否进入适配器边界由后续 PoC 决定 | 源码确认（静态 AST） | 自动生成 |
+| method | v2sim.gui.parabox.lgb.LoadGroupBox.edit_params | (self) | v2sim/gui/parabox/lgb.py#L53 | 待人工补充：源码未提供可直接确认的功能说明；需结合 v2sim.gui.parabox.lgb.LoadGroupBox.edit_params 的实现与调用链确认。 | 输入：无显式输入；输出：返回值未注解 | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | ParamsEditor；pe.wait_window；str | 可参考：是否进入适配器边界由后续 PoC 决定 | 源码确认（静态 AST） | 自动生成 |
+| method | v2sim.gui.parabox.lgb.LoadGroupBox.work | (self) | v2sim/gui/parabox/lgb.py#L59 | 待人工补充：源码未提供可直接确认的功能说明；需结合 v2sim.gui.parabox.lgb.LoadGroupBox.work 的实现与调用链确认。 | 输入：无显式输入；输出：返回值未注解 | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | self.cb.get；self.destroy；self.results.append；join；range；int；self.en_s.get；self.en_e.get；self.en_t.get；MB.showerror；self.focus；mode.split；_L | 可参考：是否进入适配器边界由后续 PoC 决定 | 源码确认（静态 AST） | 自动生成 |

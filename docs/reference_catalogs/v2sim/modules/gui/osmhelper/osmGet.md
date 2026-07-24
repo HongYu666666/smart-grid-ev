@@ -1,0 +1,9 @@
+# `v2sim.gui.osmhelper.osmGet`
+
+本模块共记录 3 个函数、类或方法。
+
+| kind | qualified_name | signature | source_anchor | summary | inputs_outputs | side_effects | dependencies | development_relevance | evidence_status | review_status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| function | v2sim.gui.osmhelper.osmGet.get | (args=None) | v2sim/gui/osmhelper/osmGet.py#L223 | 待人工补充：源码未提供可直接确认的功能说明；需结合 v2sim.gui.osmhelper.osmGet.get 的实现与调用链确认。 | 输入：args；输出：返回值未注解 | 存在文件或序列化读写调用；具体路径和覆盖行为需按调用场景复核 | get_options；conn.close；sumolib.output.parse_fast；os.path.join；urlparse.urlparse；os.environ.get；httplib.HTTPSConnection；conn.set_tunnel；json.loads；readCompressed；set；sumolib.openz；list；gzip.open；range；outf.close | 可参考：是否进入适配器边界由后续 PoC 决定 | 源码确认（静态 AST） | 自动生成 |
+| function | v2sim.gui.osmhelper.osmGet.get_options | (args) | v2sim/gui/osmhelper/osmGet.py#L186 | 待人工补充：源码未提供可直接确认的功能说明；需结合 v2sim.gui.osmhelper.osmGet.get_options 的实现与调用链确认。 | 输入：args；输出：返回值未注解 | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | sumolib.options.ArgumentParser；optParser.add_argument；optParser.parse_args；optParser.error；float；options.bbox.split | 可参考：是否进入适配器边界由后续 PoC 决定 | 源码确认（静态 AST） | 自动生成 |
+| function | v2sim.gui.osmhelper.osmGet.readCompressed | (options, conn, urlpath, query, roadTypesJSON, getShapes, filename) | v2sim/gui/osmhelper/osmGet.py#L44 | 待人工补充：源码未提供可直接确认的功能说明；需结合 v2sim.gui.osmhelper.osmGet.readCompressed 的实现与调用链确认。 | 输入：options, conn, urlpath, query, roadTypesJSON, getShapes, filename；输出：返回值未注解 | 存在文件或序列化读写调用；具体路径和覆盖行为需按调用场景复核 | conn.request；conn.getresponse；collections.defaultdict；keyValueDict.items；queryStringNode.append；urlpath.startswith；finalQuery.encode；print；decode；len；join；open；outf.write；filename.endswith；sumolib.xml.parse；response.getheader | 可参考：是否进入适配器边界由后续 PoC 决定 | 源码确认（静态 AST） | 自动生成 |

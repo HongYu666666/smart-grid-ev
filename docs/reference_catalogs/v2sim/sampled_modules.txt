@@ -1,0 +1,10 @@
+# 每个模块的全部目录行均检查限定名、锚点和非空字段；这不升级运行证据。
+v2sim.gen.veh
+v2sim.net
+v2sim.plot.reader
+v2sim.seg
+v2sim.sim.tlog
+v2sim.stats.logcs
+v2sim.stats.logev
+v2sim.stats.loggr
+v2sim.veh.vdict
