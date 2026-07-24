@@ -1,0 +1,11 @@
+# `v2sim.app.cmd_plot`
+
+本模块共记录 5 个函数、类或方法。
+
+| kind | qualified_name | signature | source_anchor | summary | inputs_outputs | side_effects | dependencies | development_relevance | evidence_status | review_status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| function | v2sim.app.cmd_plot.clear_all | (p: str) | v2sim/app/cmd_plot.py#L8 | 待人工补充：源码未提供可直接确认的功能说明；需结合 v2sim.app.cmd_plot.clear_all 的实现与调用链确认。 | 输入：p；输出：返回值未注解 | 静态扫描未确认外部副作用；运行态副作用仍需在 PoC 中复核 | print；exists；Lang.PLOT_TOOL_CLEARING.format；Path；p0.exists；p0.is_dir；shutil.rmtree；str | 可参考：是否进入适配器边界由后续 PoC 决定 | 源码确认（静态 AST） | 自动生成 |
+| function | v2sim.app.cmd_plot.main | () | v2sim/app/cmd_plot.py#L123 | 待人工补充：源码未提供可直接确认的功能说明；需结合 v2sim.app.cmd_plot.main 的实现与调用链确认。 | 输入：无显式输入；输出：返回值未注解 | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | ArgChecker；args.pop_str；args.pop_bool；args.pop_int；exists；print；exit；args.empty；args.keys；AdvancedPlot；Lang.PLOT_TOOL_INDIR_NOT_FOUND.format；clear_all；recusrive_clear_all；Path；Lang.PLOT_TOOL_UNKNOWN_ARG.format；plot_all | 可参考：是否进入适配器边界由后续 PoC 决定 | 源码确认（静态 AST） | 自动生成 |
+| function | v2sim.app.cmd_plot.plot_all | (config: dict, p: str, q: bool, npl: AdvancedPlot) | v2sim/app/cmd_plot.py#L19 | 待人工补充：源码未提供可直接确认的功能说明；需结合 v2sim.app.cmd_plot.plot_all 的实现与调用链确认。 | 输入：config, p, q, npl；输出：返回值未注解 | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | print；ReadOnlyStatistics；npl.load_series；exists；Lang.PLOT_TOOL_PLOTTING.format；sta.has_BUS；any；npl.quick_bus_tot；sta.has_ESS；len；enumerate；sta.has_GEN；npl.quick_gen_tot；sta.has_LINE；sta.has_PVW；sta.has_FCS | 可参考：是否进入适配器边界由后续 PoC 决定 | 源码确认（静态 AST） | 自动生成 |
+| function | v2sim.app.cmd_plot.recursive_plot_all | (config: dict, p: str, q: bool, npl: AdvancedPlot) | v2sim/app/cmd_plot.py#L112 | 待人工补充：源码未提供可直接确认的功能说明；需结合 v2sim.app.cmd_plot.recursive_plot_all 的实现与调用链确认。 | 输入：config, p, q, npl；输出：返回值未注解 | 静态扫描未确认外部副作用；运行态副作用仍需在 PoC 中复核 | plot_all；iterdir；i.is_dir；Path；recursive_plot_all；str | 可参考：是否进入适配器边界由后续 PoC 决定 | 源码确认（静态 AST） | 自动生成 |
+| function | v2sim.app.cmd_plot.recusrive_clear_all | (p: str) | v2sim/app/cmd_plot.py#L104 | 待人工补充：源码未提供可直接确认的功能说明；需结合 v2sim.app.cmd_plot.recusrive_clear_all 的实现与调用链确认。 | 输入：p；输出：返回值未注解 | 静态扫描未确认外部副作用；运行态副作用仍需在 PoC 中复核 | clear_all；iterdir；i.is_dir；Path；recusrive_clear_all；str | 可参考：是否进入适配器边界由后续 PoC 决定 | 源码确认（静态 AST） | 自动生成 |

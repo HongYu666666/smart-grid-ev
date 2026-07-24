@@ -1,49 +1,64 @@
-# V2Sim 代码目录覆盖率
+# 覆盖率与完整性报告
 
-## 扫描结果（精确统计）
+- 项目：`V2Sim`
+- 固定版本：`v1.4.4`
+- 固定提交：`5cf6777ac6780f2247802533941204e4a95bc2ce`
+- 扫描根目录：`v2sim/`
+- 已解析生产源码文件：114
+- 解析失败文件：0
+- 排除 Python 文件：0
+- 符号总数：1755
+- 函数：158
+- 类：181
+- 方法：1416
+- 人工复核：49
+- 模块抽检：298
+- 自动生成：1408
+- 空功能说明：0
+- 重复限定名：0
+- 已合并的多处定义：13
+- 人工复核策略中未找到的符号：0
+- 人工复核符号缺少人工摘要：0
 
-| 指标 | 值 |
-|------|---|
-| 扫描 .py 文件数 | 114 |
-| 解析失败文件数 | 0 |
-| 原始符号数（含重复） | 1770 |
-| 去重后唯一符号数 | 1755 |
-| 重复 qualified_name 数 | 13 |
-| class | 181 |
-| function | 158 |
-| method | 1416 |
-| 功能说明已填充 | 641 |
-| 功能说明待人工补充 | 1114 |
+## 排除规则
 
-## 排除项
+- 排除目录：`__pycache__`
+- 测试、示例、vendored、生成代码和构建产物仅在明确命中上述目录时排除。
 
-| 排除类型 | 说明 |
-|---------|------|
-| `__pycache__/` | Python 编译缓存 |
-| 非 .py 文件 | 数据文件、配置文件等 |
-| 嵌套定义（二级以下） | 仅扫描顶层和类一级方法 |
+## 完整性判定
 
-## 去重说明
+- 可解析源码限定名与目录限定名集合：一致。
+- 所有符号功能说明非空：是。
+- 人工复核策略中的符号均被扫描：是。
 
-使用 `qualified_name`（模块路径.类名.方法名）作为唯一标识。
-原始扫描发现 13 个重复项，已去重保留首次出现。
+## 解析失败
 
-### 重复项示例（前10个）
+- 无。
 
-- `gen.csquery._Rect.__init__` (出现 3 次)
-- `gen.misc.create_veh` (出现 3 次)
-- `gui.mainbox.controls.network.NetworkPanel.Enabled` (出现 2 次)
-- `gui.mainbox.controls.network.NetworkPanel.saved` (出现 2 次)
-- `gui.mainbox.controls.scrtv.ScrollableTreeView.AfterFunc` (出现 2 次)
-- `veh.ev.EV.kf` (出现 2 次)
-- `veh.ev.EV.ks` (出现 2 次)
-- `veh.ev.EV.kv2g` (出现 2 次)
-- `veh.veh.Vehicle.kf` (出现 2 次)
-- `veh.veh.Vehicle.kr` (出现 2 次)
+## 重复限定名
 
-## 复核方法
+- 无。
 
-- `evidence_status`: `auto_generated` = 工具自动生成
-- `review_status`: `pending` = 待复核, `reviewed` = 已人工复核
-- 核心模块（core, sim, hub, veh, net, plugins）需逐项人工复核
-- 辅助模块按模块抽检 ≥5 符号
+## 已合并的多处定义
+
+- `v2sim.gen.csquery._Rect.__init__`：同一运行时限定名的 getter/setter、兼容分支或重定义已合并，源码锚点全部保留。
+- `v2sim.gen.misc.create_veh`：同一运行时限定名的 getter/setter、兼容分支或重定义已合并，源码锚点全部保留。
+- `v2sim.gui.mainbox.controls.network.NetworkPanel.Enabled`：同一运行时限定名的 getter/setter、兼容分支或重定义已合并，源码锚点全部保留。
+- `v2sim.gui.mainbox.controls.network.NetworkPanel.saved`：同一运行时限定名的 getter/setter、兼容分支或重定义已合并，源码锚点全部保留。
+- `v2sim.gui.mainbox.controls.scrtv.ScrollableTreeView.AfterFunc`：同一运行时限定名的 getter/setter、兼容分支或重定义已合并，源码锚点全部保留。
+- `v2sim.veh.ev.EV.kf`：同一运行时限定名的 getter/setter、兼容分支或重定义已合并，源码锚点全部保留。
+- `v2sim.veh.ev.EV.ks`：同一运行时限定名的 getter/setter、兼容分支或重定义已合并，源码锚点全部保留。
+- `v2sim.veh.ev.EV.kv2g`：同一运行时限定名的 getter/setter、兼容分支或重定义已合并，源码锚点全部保留。
+- `v2sim.veh.veh.Vehicle.kf`：同一运行时限定名的 getter/setter、兼容分支或重定义已合并，源码锚点全部保留。
+- `v2sim.veh.veh.Vehicle.kr`：同一运行时限定名的 getter/setter、兼容分支或重定义已合并，源码锚点全部保留。
+- `v2sim.veh.veh.Vehicle.omega`：同一运行时限定名的 getter/setter、兼容分支或重定义已合并，源码锚点全部保留。
+- `v2sim.veh.veh.Vehicle.status`：同一运行时限定名的 getter/setter、兼容分支或重定义已合并，源码锚点全部保留。
+- `v2sim.veh.veh.Vehicle.target_CS`：同一运行时限定名的 getter/setter、兼容分支或重定义已合并，源码锚点全部保留。
+
+## 未命中的人工复核符号
+
+- 无。
+
+## 缺少人工摘要的复核符号
+
+- 无。

@@ -452,7 +452,6 @@ def main() -> None:
         "",
         "- 排除目录：" + (", ".join(f"`{item}`" for item in sorted(excluded)) or "无"),
         "- 测试、示例、vendored、生成代码和构建产物仅在明确命中上述目录时排除。",
-        "- `pypower/` 是 pandapower 运行时求解链的一部分，本次未作为 vendored 代码排除。",
         "",
         "## 完整性判定",
         "",
@@ -463,6 +462,11 @@ def main() -> None:
         "## 解析失败",
         "",
     ]
+    if args.project == "pandapower":
+        coverage_lines.insert(
+            coverage_lines.index("## 完整性判定") - 1,
+            "- `pypower/` 是 pandapower 运行时求解链的一部分，本次未作为 vendored 代码排除。",
+        )
     if parse_errors:
         coverage_lines.extend(
             f"- `{path.as_posix()}`：{clean_text(error)}"

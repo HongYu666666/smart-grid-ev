@@ -1,0 +1,10 @@
+# `v2sim.sim.uxsim.scenario_reader_writer`
+
+本模块共记录 4 个函数、类或方法。
+
+| kind | qualified_name | signature | source_anchor | summary | inputs_outputs | side_effects | dependencies | development_relevance | evidence_status | review_status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| function | v2sim.sim.uxsim.scenario_reader_writer.demand_info_record | (func) | v2sim/sim/uxsim/scenario_reader_writer.py#L9 | A decorator to record arguments of `World.addVehicle`, `World.adddemand`, etc used in scenario definition in World object. | 输入：func；输出：返回值未注解 | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | functools.wraps；bind；bound_args.apply_defaults；dict；func；arg_dict.get；append；inspect.signature；list；bound_args.arguments.items；arg_dict.items | 可参考：是否进入适配器边界由后续 PoC 决定 | 源码确认（静态 AST） | 自动生成 |
+| function | v2sim.sim.uxsim.scenario_reader_writer.instance_to_arg_dict | (instance) | v2sim/sim/uxsim/scenario_reader_writer.py#L41 | Convert an instance's attributes to a dictionary of constructor arguments. | 输入：instance；输出：返回值未注解 | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | inspect.signature；vars；signature.parameters.items；instance_vars.get；list；str；type | 可参考：是否进入适配器边界由后续 PoC 决定 | 源码确认（静态 AST） | 自动生成 |
+| function | v2sim.sim.uxsim.scenario_reader_writer.load_scenario | (W, fname, network=True, demand=True) | v2sim/sim/uxsim/scenario_reader_writer.py#L151 | Load scenario data from a file. | 输入：W, fname, network, demand；输出：返回值未注解 | 存在文件或序列化读写调用；具体路径和覆盖行为需按调用场景复核 | W.print；open；pickle.load；type；W.addNode；W.addLink；len；W.adddemand；W.adddemand_point2point；W.adddemand_area2area；W.adddemand_nodes2nodes；W.adddemand_area2area2；W.adddemand_nodes2nodes2 | 可参考：是否进入适配器边界由后续 PoC 决定 | 源码确认（静态 AST） | 自动生成 |
+| function | v2sim.sim.uxsim.scenario_reader_writer.save_scenario | (W, fname, network=True, demand=True) | v2sim/sim/uxsim/scenario_reader_writer.py#L98 | Save scenario data to a file. | 输入：W, fname, network, demand；输出：返回值未注解 | 存在文件或序列化读写调用；具体路径和覆盖行为需按调用场景复核 | open；pickle.dump；nodes.append；links.append；dict；instance_to_arg_dict | 可参考：是否进入适配器边界由后续 PoC 决定 | 源码确认（静态 AST） | 自动生成 |

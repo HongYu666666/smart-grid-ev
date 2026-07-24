@@ -1,0 +1,10 @@
+# `v2sim.app.sim_single`
+
+本模块共记录 4 个函数、类或方法。
+
+| kind | qualified_name | signature | source_anchor | summary | inputs_outputs | side_effects | dependencies | development_relevance | evidence_status | review_status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| function | v2sim.app.sim_single.error_exit | (err=None, print_help: bool=False) | v2sim/app/sim_single.py#L10 | 待人工补充：源码未提供可直接确认的功能说明；需结合 v2sim.app.sim_single.error_exit 的实现与调用链确认。 | 输入：err, print_help；输出：返回值未注解 | 静态扫描未确认外部副作用；运行态副作用仍需在 PoC 中复核 | print；sys.exit；isinstance；Lang.MAIN_HELP_STR.format；Lang.ERROR_CMD_NOT_SPECIFIED.format；Lang.ERROR_GENERAL.format；str；type | 可参考：是否进入适配器边界由后续 PoC 决定 | 源码确认（静态 AST） | 自动生成 |
+| function | v2sim.app.sim_single.main | () | v2sim/app/sim_single.py#L75 | 待人工补充：源码未提供可直接确认的功能说明；需结合 v2sim.app.sim_single.main 的实现与调用链确认。 | 输入：无显式输入；输出：返回值未注解 | 存在文件或序列化读写调用；具体路径和覆盖行为需按调用场景复核 | args.pop_bool；args.pop_str_or_none；args.pop_str；ArgChecker；print；PluginHelper.add_plugin；PluginHelper.del_plugin；create_pools；items；platform.system；work；work_gui；error_exit；join；to_dict；new_args.update | 可参考：是否进入适配器边界由后续 PoC 决定 | 源码确认（静态 AST） | 自动生成 |
+| function | v2sim.app.sim_single.work | (pars: Union[ArgChecker, dict], client_options: Optional[ClientOptions]=None, alt: Optional[AltCommand]=None) | v2sim/app/sim_single.py#L27 | 待人工补充：源码未提供可直接确认的功能说明；需结合 v2sim.app.sim_single.work 的实现与调用链确认。 | 输入：pars, client_options, alt；输出：返回值未注解 | 可能修改传入对象、网络表或仿真状态；调用前后状态需由适配器校验 | kwargs.update；simulate_single；isinstance；ArgChecker；get_sim_params；print；error_exit；ClientOptions | 可参考：是否进入适配器边界由后续 PoC 决定 | 源码确认（静态 AST） | 自动生成 |
+| function | v2sim.app.sim_single.work_gui | (pars: Union[ArgChecker, dict], no_daemon: bool, debug_mode: bool) | v2sim/app/sim_single.py#L51 | 待人工补充：源码未提供可直接确认的功能说明；需结合 v2sim.app.sim_single.work_gui 的实现与调用链确认。 | 输入：pars, no_daemon, debug_mode；输出：返回值未注解 | 静态扫描未确认外部副作用；运行态副作用仍需在 PoC 中复核 | ProgBox；start；vb.mainloop；isinstance；ArgChecker；get_sim_params；vb.close；error_exit；simulate_single；threading.Thread；logging.exception | 可参考：是否进入适配器边界由后续 PoC 决定 | 源码确认（静态 AST） | 自动生成 |

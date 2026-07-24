@@ -1,84 +1,59 @@
-# V2Sim 代码目录
+# V2Sim 参考代码目录
 
-## 项目信息
+## 固定对象
 
-| 属性 | 值 |
-|------|---|
-| 项目 | V2Sim — Open-Source V2G Simulation Platform |
-| 版本 | 1.4.4 (PyPI: `pip install v2sim==1.4.4`) |
-| 仓库 | https://github.com/hesl-seu/v2sim |
-| 固定 tag | `v1.4.4` (commit `5cf6777ac6780f2247802533941204e4a95bc2ce`) |
+| 字段 | 值 |
+| --- | --- |
+| 项目 | [hesl-seu/v2sim](https://github.com/hesl-seu/v2sim) |
+| 版本 | `v1.4.4` / PyPI `1.4.4` |
+| 提交 | `5cf6777ac6780f2247802533941204e4a95bc2ce` |
 | wheel SHA256 | `8f6dd9b4822af0545806d29d0c8371cccad2594a36e5aa91e2dc9cec4ab2198e` |
 | 许可 | BSD-3-Clause |
-| 扫描范围 | `v2sim/` Python 包全部 `.py` 生产源码（顶层定义 + 类一级方法） |
-| 扫描根 | 通过 `import v2sim; Path(v2sim.__file__).parent` 自动定位，不使用硬编码路径 |
-| 排除项 | `__pycache__/`、非 `.py` 文件、二级以下嵌套定义 |
+| 扫描范围 | 固定提交下 `v2sim/` 的 114 个 Python 源码文件 |
+| 排除范围 | `__pycache__/`、非 Python 文件、函数/方法内部嵌套定义 |
+| 目录用途 | 案例复现与后续适配阅读参考，不是新系统代码或验收 baseline |
 
-## 生成命令（可重放）
+## 目录内容
 
-```bash
-# 在任何已安装 v2sim==1.4.4 的 Python 3.12 环境中执行：
-python docs/reference_catalogs/v2sim/generate_catalog.py \
-    --output docs/reference_catalogs/v2sim/
-```
+- `symbols.csv`：1755 个唯一函数、类和类方法，包含合同要求的 12 个字段；
+- `coverage.md`：源码文件、符号类型、排除项、多处定义合并和复核统计；
+- `modules/`：按真实源码路径生成的人类可读逐符号目录；
+- `manual_review.md`：场景加载、时间推进、交通、车辆、充电、配网插件和结果入口的人工复核结论；
+- `manual_review_symbols.txt`、`manual_review_summaries.tsv`：48 个核心符号的可重放人工复核策略与摘要；
+- `sampled_modules.txt`：9 个内部支撑模块、298 个符号的抽检范围。
 
-生成器通过 `import v2sim` 自动定位包路径，不依赖硬编码个人路径。
+`symbols.csv` 字段为 `kind`、`qualified_name`、`signature`、`source_anchor`、`visibility`、`summary`、`inputs_outputs`、`side_effects`、`dependencies`、`development_relevance`、`evidence_status`、`review_status`。所有字段均非空；没有 docstring 的符号保留带源码定位的“待人工补充”说明。
 
-同一固定版本重新扫描应产出相同的 `symbols.csv`（行数和 qualified_name 集合一致）。
+## 重新生成
 
-## symbols.csv 字段说明
-
-| 字段 | 含义 |
-|------|------|
-| file | 相对于包根目录的文件路径 |
-| qualified_name | 唯一限定名（模块.类.方法 格式） |
-| type | `class` / `function` / `method` |
-| name | 符号名称 |
-| signature | 函数/方法签名（含参数和返回类型注解） |
-| visibility | `public` / `protected` / `private` / `dunder` |
-| line | 源码行号（锚点） |
-| description | 功能说明（docstring 首行或"待人工补充"） |
-| inputs | 输入参数（同 signature） |
-| outputs | 输出说明 |
-| side_effects | 副作用 |
-| dependencies | 主要依赖调用 |
-| dev_usage | 开发用途说明 |
-| evidence_status | `auto_generated` = 工具生成 |
-| review_status | `pending` = 待复核 / `reviewed` = 已人工复核 |
-
-## 文件结构
-
-```
-docs/reference_catalogs/v2sim/
-├── README.md              # 本文件
-├── generate_catalog.py    # 可重放生成器脚本
-├── symbols.csv            # 全量唯一符号清单
-├── coverage.md            # 精确覆盖率统计
-└── modules/               # 按模块整理的功能说明
-    ├── core.md
-    ├── sim.md
-    ├── hub.md
-    ├── veh.md
-    ├── net.md
-    ├── plugins.md
-    ├── gen.md
-    ├── plot.md
-    └── gui.md
-```
-
-## 使用方法
-
-1. 运行 `generate_catalog.py` 生成/更新 `symbols.csv` 和 `coverage.md`
-2. `symbols.csv` 中所有符号的 `description` 均非空（无法确认的标"待人工补充"）
-3. 核心模块需人工复核后将 `review_status` 改为 `reviewed`
-4. `modules/*.md` 提供按功能分组的人工复核记录
-
-## 版本重扫验证
+先在临时目录获取同一固定提交：
 
 ```bash
-# 重新安装相同版本并扫描
-pip install v2sim==1.4.4
-python docs/reference_catalogs/v2sim/generate_catalog.py --output /tmp/rescan/
-diff docs/reference_catalogs/v2sim/symbols.csv /tmp/rescan/symbols.csv
-# 预期: 无差异（同版本同结果）
+V2SIM_CATALOG_TMP="$(mktemp -d /tmp/v2sim-catalog-XXXXXX)"
+git clone --depth 1 --branch v1.4.4 \
+  https://github.com/hesl-seu/v2sim.git \
+  "$V2SIM_CATALOG_TMP/source"
+test "$(git -C "$V2SIM_CATALOG_TMP/source" rev-parse HEAD)" = \
+  "5cf6777ac6780f2247802533941204e4a95bc2ce"
 ```
+
+在仓库根目录运行：
+
+```bash
+python tools/reference_catalog/generate_python_catalog.py \
+  --source-root "$V2SIM_CATALOG_TMP/source" \
+  --package v2sim \
+  --output docs/reference_catalogs/v2sim \
+  --project V2Sim \
+  --version v1.4.4 \
+  --commit 5cf6777ac6780f2247802533941204e4a95bc2ce \
+  --exclude-dir __pycache__ \
+  --manual-review-file \
+    docs/reference_catalogs/v2sim/manual_review_symbols.txt \
+  --manual-summary-file \
+    docs/reference_catalogs/v2sim/manual_review_summaries.tsv \
+  --sampled-module-file \
+    docs/reference_catalogs/v2sim/sampled_modules.txt
+```
+
+生成器在解析失败、空功能说明、重复限定名、人工复核符号缺失或人工摘要缺失时返回非零退出码。Reviewer 应在同一固定提交上重跑并比较 `symbols.csv` 和 `coverage.md`；预期为 114 files / 1755 symbols / 0 duplicates / 0 empty summaries / 0 parse errors。
