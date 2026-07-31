@@ -15,10 +15,16 @@
 - [x] 3.2 `lead` 编写 `docs/deliverables/软件设计规格说明书.md` 的总体设计和数据模型初稿，明确模块职责、交互方向、安全裁决和后续实现边界；Reviewer：`member`；验证：文档链接到统一数据模型说明书及 `REQ-EV-*`，且不包含未验证的运行时完成声明。
 - [x] 3.3 `lead` 根据 member 的场景报告、基础数据清单和 Review 收敛两份设计文档中的来源、缺口与开放问题；Reviewer：`member`；验证：Review 意见逐项关闭，三份文档不存在相互冲突的对象、单位、时序或边界定义。
 
-## 4. 成员模块级 Spec
+## 4. 后续移交（不属于本 change 验收）
 
-- [ ] 4.1 `member` 在本 change 获批后，从最新主分支创建独立的数据准备/场景输入模块 OpenSpec change，声明上层 change、对应 Requirement/Scenario、负责模块、外部契约、内部设计自由度、依赖和验收；Reviewer：`lead`；验证：新 change 的 proposal、design、specs、tasks 完整并通过 `openspec validate`。（转入 8.1 后下一阶段，不属于 7.31 文档成果窗口）
-- [ ] 4.2 `member` 在模块 change 中细化字段、校验、转换、结构化错误、版本兼容和测试，但不静默改变本 change 的跨模块契约；Reviewer：`lead`；验证：模块 spec 对上层 Requirement/Scenario 逐项可追踪，公共契约变更均先形成独立上层修订。（随 4.1 转入下一阶段）
+- 4.1 已转交 Issue #19：`member` 在 8.1 后从最新主分支创建独立的数据准备/
+  场景输入模块 OpenSpec change，声明本上层合同、对应 Requirement/Scenario、
+  负责模块、外部契约、内部设计自由度、依赖和验收。
+- 4.2 随 4.1 转入下一阶段：member 在模块 change 中细化字段、校验、转换、
+  结构化错误、版本兼容和测试；公共契约变更必须先形成独立上层修订。
+
+以上为已批准设计基线的后续使用方式，不是
+`define-unified-ev-grid-data-model` 的归档阻塞项。
 
 ## 5. 集成、文档收敛与验收
 
