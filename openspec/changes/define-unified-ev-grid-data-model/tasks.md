@@ -1,7 +1,7 @@
 ## 1. 系统级契约准备
 
 - [x] 1.1 `lead` 编写 `openspec/changes/define-unified-ev-grid-data-model/{proposal.md,design.md,specs/**}`，明确统一身份、时间、单位、事件、动作、结果、错误和适配边界；Reviewer：`member`；验证：`openspec status --change define-unified-ev-grid-data-model` 显示 proposal、design、specs 完成。
-- [ ] 1.2 `member` Review 本 change 的 Requirement/Scenario，逐项检查是否足以细化数据准备模块且未把 v1、V2Sim 或候选后端提升为新系统合同；Reviewer：`lead`；验证：在 #12 留下带结论的 Review 记录并关闭全部阻塞意见。
+- [x] 1.2 `member` Review 本 change 的 Requirement/Scenario，逐项检查是否足以细化数据准备模块且未把 v1、V2Sim 或候选后端提升为新系统合同；Reviewer：`lead`；验证：在 #12 留下带结论的 Review 记录并关闭全部阻塞意见。
 
 ## 2. 场景数据基础
 
@@ -22,7 +22,7 @@
 
 ## 5. 集成、文档收敛与验收
 
-- [ ] 5.1 `lead` 将 #12、#13、#14 和成员模块 change 的依赖关系与未决问题记录到对应 Issue，保持 OpenSpec 为设计与验收权威；Reviewer：`member`；验证：每个 Issue 可回链到唯一 change、负责人、Reviewer 和当前状态。
+- [x] 5.1 `lead` 将 #12、#13、#14 和成员模块 change 的依赖关系与未决问题记录到对应 Issue，保持 OpenSpec 为设计与验收权威；Reviewer：`member`；验证：每个 Issue 可回链到唯一 change、负责人、Reviewer 和当前状态。
 - [x] 5.2 `lead` 对本 change 执行 `openspec validate define-unified-ev-grid-data-model`、文档本地链接检查和 `git diff --check`；Reviewer：`member`；验证：命令全部通过且结果记录在 PR。
-- [ ] 5.3 `member` 对正式设计成果执行最终交叉 Review，确认基础数据缺口、参考证据边界和成员细化入口清晰；Reviewer：`lead`；验证：PR Review 结论为通过或全部阻塞意见已关闭。
-- [ ] 5.4 `lead` 完成文档收敛和最终接受，确认本 change 只建立设计基线、不宣称新系统运行时已实现；Reviewer：`member`；验证：#12 验收项、OpenSpec tasks、PR 文件范围和合并结论一致。
+- [x] 5.3 `member` 对正式设计成果执行最终交叉 Review，确认基础数据缺口、参考证据边界和成员细化入口清晰；Reviewer：`lead`；验证：PR Review 结论为通过或全部阻塞意见已关闭。
+- [x] 5.4 `lead` 完成文档收敛和最终接受，确认本 change 只建立设计基线、不宣称新系统运行时已实现；Reviewer：`member`；验证：#12 验收项、OpenSpec tasks、PR 文件范围和合并结论一致。
