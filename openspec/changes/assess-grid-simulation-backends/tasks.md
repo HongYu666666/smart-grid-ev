@@ -25,7 +25,7 @@
 
 - [x] 4.1 member（Reviewer: lead）复核 lead 工具报告中的来源、证据分级、接口与 EV 场景适配判断，在 lead PR 中给出逐条意见；lead 确认意见已处理或转为后续 Issue
 - [x] 4.2 lead（Reviewer: member）复核 member 的 V2Sim 记录中环境完整性、命令可复现性、输入输出、结果检查和证据等级，在 member PR 中逐项确认或退回
-- [ ] 4.3 lead（Reviewer: member）把调研结论与 `docs/deliverables/软件需求分析报告.md`、`docs/deliverables/典型场景-业务需求-孪智功能映射表.md` 对照，记录需要进入下一轮 OpenSpec 的接口、数据模型和 PoC 问题；通过文档链接逐项追踪（当前主分支缺少软件需求分析报告，前置补齐与三文档追踪已转 Issue #15）
+- [x] 4.3 lead（Reviewer: member）把调研结论与 `docs/deliverables/软件需求分析报告.md`、`docs/deliverables/典型场景-业务需求-孪智功能映射表.md` 对照，记录需要进入下一轮 OpenSpec 的接口、数据模型和 PoC 问题；通过文档链接逐项追踪（需求报告第 7 节已回链映射表、配网报告、V2Sim 记录及 Issue #12—#14；Reviewer 待在 PR 中复核）
 
 ## 5. 集成、文档归并与验收
 
