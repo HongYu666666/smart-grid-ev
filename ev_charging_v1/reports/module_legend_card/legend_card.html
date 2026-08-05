@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>模块类别 · 能力状态 · 来源图例卡 · v0.1 experimental</title>
+<style>
+  :root{--ink:#15211d;--muted:#61706a;--paper:#f4f1e8;--panel:#fffdf7;--line:#d7d1c2;--green:#147a56;--red:#b74134;--amber:#a66a12;--blue:#315b8a;--gray:#615f59}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,"Noto Sans SC","Microsoft YaHei",sans-serif;line-height:1.55}
+  header{padding:28px clamp(20px,5vw,56px) 20px;background:linear-gradient(125deg,#172a23,#28483b 65%,#365b4d);color:#fff}
+  .hero{display:flex;justify-content:space-between;gap:24px;align-items:end;max-width:1100px;margin:auto}
+  .eyebrow{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:#cbd9d2}
+  h1{font:700 clamp(22px,3vw,32px)/1.2 Georgia,"Noto Serif SC",serif;margin:8px 0}
+  header p{margin:0;max-width:640px;color:#dce8e2;font-size:14px}
+  .stamp{white-space:nowrap;border:1px solid #789589;padding:8px 13px;border-radius:999px;color:#e6f0eb;font-size:12px;font-weight:700;letter-spacing:.04em}
+  main{max-width:1100px;margin:0 auto;padding:24px clamp(18px,4vw,40px) 48px}
+  .notice{background:#fff7df;border-left:4px solid var(--amber);padding:12px 16px;margin-bottom:20px;border-radius:7px;color:#69450f;font-size:13px}
+  section{margin-bottom:26px}
+  h2{font-size:16px;margin:0 0 4px}
+  .sub{color:var(--muted);font-size:12px;margin:0 0 12px}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .grid.four{grid-template-columns:repeat(4,1fr)}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .swatch{width:100%;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;margin-bottom:10px}
+  .kind-reusable_core .swatch{background:#e7e3d6;border:2px solid #8d8a7a;color:#4a473c}
+  .kind-replaceable_domain .swatch{background:#e7e3d6;border:2px dashed #4a5f8a;color:#2c3f63}
+  .kind-replaceable_adapter .swatch{background:#e7e3d6;border:2px dotted #8a4a4a;color:#6b2f2f}
+  .pill{display:inline-block;padding:4px 9px;border-radius:999px;font-size:12px;font-weight:700}
+  .demo_bound{background:#d9f0e6;color:var(--green)}
+  .planned{background:#e1e8f2;color:var(--blue)}
+  .unavailable{background:#f4e7ce;color:var(--amber)}
+  .not_applicable{background:#e8e5dd;color:var(--gray)}
+  .card h3{margin:0 0 6px;font-size:13px}
+  .card .def{font-size:12px;color:var(--muted);margin:0 0 10px}
+  .members{font-size:12px;color:var(--ink)}
+  .members code{background:#efeadb;padding:1px 5px;border-radius:5px;font-size:11px}
+  .members li{margin-bottom:3px}
+  .marks{display:flex;gap:14px;flex-wrap:wrap}
+  .mark{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;flex:1;min-width:220px}
+  .mark .demo-stamp{display:inline-block;border:1px solid #789589;background:#1d2f27;color:#e6f0eb;padding:6px 11px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.04em;margin-bottom:8px}
+  .mark .synth-stamp{display:inline-block;background:#fff7df;border-left:3px solid var(--amber);color:#69450f;padding:5px 10px;border-radius:5px;font-size:11px;margin-bottom:8px}
+  .mark .source-stamp{display:inline-block;background:#efeadb;color:#4a473c;padding:5px 10px;border-radius:5px;font-size:11px;font-family:"SFMono-Regular",Consolas,monospace;margin-bottom:8px}
+  .mark p{margin:0;font-size:12px;color:var(--muted)}
+  footer{max-width:1100px;margin:0 auto;padding:0 clamp(18px,4vw,40px) 40px;font-size:12px;color:var(--muted)}
+  footer code{font-family:"SFMono-Regular",Consolas,monospace}
+</style>
+</head>
+<body>
+<header>
+  <div class="hero">
+    <div>
+      <div class="eyebrow">Issue #24 · Legend Card for #26</div>
+      <h1>模块类别 · 能力状态 · 来源图例卡</h1>
+      <p>供 #26（document-ev-scenario-architecture-views）绘制三张关键图时参考的图例建议；只整理已有名称与来源，不新增模块、能力、字段或箭头。</p>
+    </div>
+    <div class="stamp">v0.1 · EXPERIMENTAL</div>
+  </div>
+</header>
+<main>
+  <div class="notice"><strong>边界：</strong>本卡不构成公共合同，颜色/符号均为建议，最终是否采用、整合由 HongYu 决定；名称与状态均逐条引自权威来源（见页脚）。</div>
+
+  <section>
+    <h2>1. 模块类别图例（3 类）</h2>
+    <p class="sub">来源：module-manifest.json · modules[].kind；无既有配色，以下为本卡新提出的建议（边框样式区分，不与状态色冲突）</p>
+    <div class="grid">
+      <div class="card kind-reusable_core">
+        <div class="swatch">■ 实线方框</div>
+        <h3>reusable_core（可复用核心）</h3>
+        <p class="def">跨场景复用的通用能力，不属于 EV 领域本身</p>
+        <ul class="members">
+          <li><code>scenario-manager</code></li>
+          <li><code>object-registry</code></li>
+          <li><code>contract-registry</code></li>
+          <li><code>clock-scheduler</code></li>
+          <li><code>runtime-orchestrator</code></li>
+          <li><code>proposal-gateway</code></li>
+          <li><code>safety-transaction</code></li>
+          <li><code>evidence-storage</code></li>
+          <li><code>evaluation</code></li>
+          <li><code>review-replay</code></li>
+        </ul>
+      </div>
+      <div class="card kind-replaceable_domain">
+        <div class="swatch">▨ 虚线方框</div>
+        <h3>replaceable_domain（可替换领域）</h3>
+        <p class="def">EV 场景特定的领域孪生，未来可替换为其他场景实现</p>
+        <ul class="members">
+          <li><code>grid-twin</code></li>
+          <li><code>ev-traffic-twin</code></li>
+          <li><code>charging-twin</code></li>
+        </ul>
+      </div>
+      <div class="card kind-replaceable_adapter">
+        <div class="swatch">▢ 点线方框</div>
+        <h3>replaceable_adapter（可替换适配器）</h3>
+        <p class="def">对接外部后端/方法/存储的转换层</p>
+        <ul class="members">
+          <li><code>external-adapters</code></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>2. 能力状态图例（4 类）</h2>
+    <p class="sub">来源：module-manifest.json · allowed_statuses；配色直接复用 experiments/architecture_proof/architecture_proof/render.py 中已有的 pill 配色（未新造颜色）</p>
+    <div class="grid four">
+      <div class="card">
+        <span class="pill demo_bound">demo_bound</span>
+        <p class="def" style="margin-top:8px">只在本周固定示例边界内有证据</p>
+      </div>
+      <div class="card">
+        <span class="pill planned">planned</span>
+        <p class="def" style="margin-top:8px">责任和合同已登记，尚未实现</p>
+      </div>
+      <div class="card">
+        <span class="pill unavailable">unavailable</span>
+        <p class="def" style="margin-top:8px">所需外部能力/环境当前不可用</p>
+      </div>
+      <div class="card">
+        <span class="pill not_applicable">not_applicable</span>
+        <p class="def" style="margin-top:8px">该场景明确不需要</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>3. 页脚 / 角标示例</h2>
+    <p class="sub">来源：render.py 页头徽标 + frozen_demo/README.md 措辞，供 #26 三张关键图统一标注版本边界</p>
+    <div class="marks">
+      <div class="mark">
+        <span class="demo-stamp">v0.1 · EXPERIMENTAL</span>
+        <p>标注图/页面当前处于实验阶段，非正式验收版本。原样复用 render.py 页头徽标样式。</p>
+      </div>
+      <div class="mark">
+        <span class="synth-stamp">demo / synthetic 输入</span>
+        <p>标注数据来自固定构造输入，非潮流计算或真实项目数据。原样复用 frozen_demo/README.md 措辞。</p>
+      </div>
+      <div class="mark">
+        <span class="source-stamp">来源：module-manifest.json v0.1.0</span>
+        <p>标注图中名称/状态的权威来源路径与版本号，便于合同变更时定位需要同步的图。</p>
+      </div>
+    </div>
+  </section>
+</main>
+<footer>
+  来源引用：
+  <code>docs/deliverables/仿真系统总体架构设计说明书.md</code>（模块清单表 §3、能力状态定义 §168-171 行）·
+  <code>experiments/architecture_proof/module-manifest.json</code>（manifest_version 0.1.0）·
+  <code>experiments/architecture_proof/schemas/module-manifest.schema.json</code>·
+  <code>experiments/architecture_proof/architecture_proof/render.py</code>（状态 pill 配色）·
+  <code>experiments/architecture_proof/frozen_demo/README.md</code>（demo/synthetic 措辞）——
+  均位于分支 <code>origin/openspec/23-runnable-simulation-dashboard</code>，编写者：mingxiao2004（Issue #24），未整合前不构成公共合同。
+</footer>
+</body>
+</html>
